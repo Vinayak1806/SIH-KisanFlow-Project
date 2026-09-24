@@ -54,13 +54,13 @@ export const DigitalToken: React.FC = () => {
       {/* Header */}
       <div className="text-center mb-6">
         <span className="text-xs font-extrabold uppercase tracking-wider text-green-800 bg-green-100 px-3.5 py-1 rounded-full border border-green-200">
-          Official Government Virtual Token
+          {language === 'mr' ? 'शासकीय डिजिटल टोकन' : language === 'hi' ? 'सरकारी डिजिटल टोकन' : 'Official Government Virtual Token'}
         </span>
         <h1 className="text-2xl sm:text-3xl font-black text-green-950 mt-2">
           {t('your_token')}
         </h1>
         <p className="text-xs sm:text-sm text-gray-500 mt-1">
-          Valid for entry at APMC Market Yard electronic check-in gate
+          {language === 'mr' ? 'बाजार समिती प्रवेशद्वारावर इलेक्ट्रॉनिक नोंदणीसाठी वैध' : language === 'hi' ? 'कृषि उपज मंडी गेट पर इलेक्ट्रॉनिक चेक-इन के लिए मान्य' : 'Valid for entry at APMC Market Yard electronic check-in gate'}
         </p>
       </div>
 
@@ -76,7 +76,9 @@ export const DigitalToken: React.FC = () => {
               <span className="text-2xl">🌾</span>
               <div>
                 <div className="font-extrabold text-sm sm:text-base tracking-tight">KisanFlow Digital Pass</div>
-                <div className="text-[10px] sm:text-xs text-green-200">Dept of Agriculture & Farmers Welfare</div>
+                <div className="text-[10px] sm:text-xs text-green-200">
+                  {language === 'mr' ? 'कृषी व शेतकरी कल्याण विभाग' : language === 'hi' ? 'कृषि एवं किसान कल्याण विभाग' : 'Dept of Agriculture & Farmers Welfare'}
+                </div>
               </div>
             </div>
             <span className="text-xs font-mono font-bold bg-white/20 px-2.5 py-1 rounded-md">
@@ -87,7 +89,7 @@ export const DigitalToken: React.FC = () => {
           {/* Token Number & Large QR Code */}
           <div className="p-6 sm:p-8 text-center">
             <div className="text-xs font-extrabold uppercase tracking-widest text-gray-400">
-              Token Identifier
+              {language === 'mr' ? 'टोकन क्रमांक' : language === 'hi' ? 'टोकन क्रमांक' : 'Token Identifier'}
             </div>
             <div className="text-3xl sm:text-4xl font-black tracking-wider text-green-950 font-mono my-1.5">
               {currentTokenId}
@@ -106,7 +108,7 @@ export const DigitalToken: React.FC = () => {
               </div>
             </div>
             <p className="text-xs text-gray-500 font-medium">
-              Scan at gate or counter for instant automated check-in
+              {language === 'mr' ? 'त्वरित स्वयंचलित पडताळणीसाठी गेटवर क्यूआर स्कॅन करा' : language === 'hi' ? 'त्वरित स्वचालित चेक-इन के लिए गेट पर क्यूआर स्कैन करें' : 'Scan at gate or counter for instant automated check-in'}
             </p>
 
             {/* Dashed Ticket Cut Line */}
@@ -119,19 +121,19 @@ export const DigitalToken: React.FC = () => {
             {/* Details Table */}
             <div className="space-y-2.5 text-left text-xs sm:text-sm">
               <div className="flex justify-between py-1 border-b border-gray-100">
-                <span className="text-gray-500 font-medium">Farmer:</span>
-                <span className="font-extrabold text-gray-900">{token?.farmer_name || 'Rajesh Baburao Pawar'}</span>
+                <span className="text-gray-500 font-medium">{language === 'mr' ? 'शेतकरी' : language === 'hi' ? 'किसान' : 'Farmer'}:</span>
+                <span className="font-extrabold text-gray-900">{token?.farmer_name || (language === 'mr' ? 'राजेश बाबुराव पवार' : language === 'hi' ? 'राजेश बाबूराव पवार' : 'Rajesh Baburao Pawar')}</span>
               </div>
               <div className="flex justify-between py-1 border-b border-gray-100">
-                <span className="text-gray-500 font-medium">Farmer ID:</span>
+                <span className="text-gray-500 font-medium">{language === 'mr' ? 'शेतकरी आयडी' : language === 'hi' ? 'किसान आईडी' : 'Farmer ID'}:</span>
                 <span className="font-mono font-bold text-gray-800">{token?.farmer_farmer_id || 'FARM1001'}</span>
               </div>
               <div className="flex justify-between py-1 border-b border-gray-100">
-                <span className="text-gray-500 font-medium">Crop & Quantity:</span>
-                <span className="font-extrabold text-green-900">{token?.crop_name || 'Wheat'} • {token?.quantity || 35} Quintals</span>
+                <span className="text-gray-500 font-medium">{language === 'mr' ? 'पीक व वजन' : language === 'hi' ? 'फसल व वजन' : 'Crop & Quantity'}:</span>
+                <span className="font-extrabold text-green-900">{token?.crop_name || (language === 'mr' ? 'गहू' : language === 'hi' ? 'गेहूं' : 'Wheat')} • {token?.quantity || 35} {language === 'mr' ? 'क्विंटल' : language === 'hi' ? 'क्विंटल' : 'Quintals'}</span>
               </div>
               <div className="flex justify-between py-1 border-b border-gray-100">
-                <span className="text-gray-500 font-medium">Procurement Yard:</span>
+                <span className="text-gray-500 font-medium">{language === 'mr' ? 'खरेदी केंद्र' : language === 'hi' ? 'खरीद केंद्र' : 'Procurement Yard'}:</span>
                 <span className="font-bold text-gray-800 text-right">{token?.center_name || 'Pune APMC Market Yard'}</span>
               </div>
             </div>
@@ -145,7 +147,7 @@ export const DigitalToken: React.FC = () => {
           {/* Virtual Queue Status Indicators */}
           <div className="bg-white rounded-3xl p-6 border border-green-200 shadow-soft">
             <h3 className="text-xs font-black uppercase tracking-wider text-gray-400 mb-3">
-              Live Queue Status
+              {language === 'mr' ? 'थेट रांग स्थिती' : language === 'hi' ? 'लाइव कतार स्थिति' : 'Live Queue Status'}
             </h3>
 
             <div className="grid grid-cols-3 gap-2 p-3 bg-green-50/80 rounded-2xl border border-green-200/70 text-center mb-4">
@@ -191,7 +193,7 @@ export const DigitalToken: React.FC = () => {
                 {copied ? (
                   <>
                     <Check className="w-4 h-4 text-green-600" />
-                    <span>Copied!</span>
+                    <span>{language === 'mr' ? 'प्रत तयार झाली!' : language === 'hi' ? 'कॉपी किया गया!' : 'Copied!'}</span>
                   </>
                 ) : (
                   <>
@@ -206,7 +208,7 @@ export const DigitalToken: React.FC = () => {
                 className="py-3 rounded-2xl bg-white hover:bg-gray-50 text-gray-800 font-bold text-xs border border-gray-200 shadow-xs flex items-center justify-center gap-1.5 active:scale-95 transition"
               >
                 <Printer className="w-4 h-4 text-green-700" />
-                <span>Print Pass</span>
+                <span>{language === 'mr' ? 'पास प्रिंट करा' : language === 'hi' ? 'पास प्रिंट करें' : 'Print Pass'}</span>
               </button>
             </div>
           </div>

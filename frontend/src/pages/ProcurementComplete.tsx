@@ -53,7 +53,11 @@ export const ProcurementComplete: React.FC = () => {
           {t('procurement_completed')}
         </h1>
         <p className="text-xs sm:text-sm text-gray-600 mt-1 max-w-md mx-auto">
-          {language === 'mr' ? 'शेतमाल शासकीय हमीभावाने यशस्वीरित्या खरेदी करण्यात आला आहे' : 'Harvest successfully accepted as per Government MSP Standards'}
+          {language === 'mr' 
+            ? 'शेतमाल शासकीय हमीभावाने यशस्वीरित्या खरेदी करण्यात आला आहे' 
+            : language === 'hi' 
+            ? 'उपज सरकारी समर्थन मूल्य पर सफलतापूर्वक खरीद ली गई है' 
+            : 'Harvest successfully accepted as per Government MSP Standards'}
         </p>
       </div>
 
@@ -63,7 +67,7 @@ export const ProcurementComplete: React.FC = () => {
         {/* Left Column: Summary & Main Figure Card */}
         <div className="lg:col-span-6 bg-white rounded-3xl p-6 border-2 border-green-700/60 shadow-token text-center">
           <div className="text-[11px] font-extrabold uppercase tracking-widest text-gray-400">
-            Total Payable Amount
+            {language === 'mr' ? 'एकूण देय रक्कम' : language === 'hi' ? 'कुल देय राशि' : 'Total Payable Amount'}
           </div>
           
           <div className="text-4xl sm:text-5xl font-black text-green-950 my-2 font-mono">
@@ -71,29 +75,29 @@ export const ProcurementComplete: React.FC = () => {
           </div>
           
           <div className="text-xs font-bold text-green-800 bg-green-50 py-1.5 px-4 rounded-full w-fit mx-auto mt-1 border border-green-200">
-            34.6 Quintals @ ₹2,425 / Q
+            34.6 {language === 'mr' ? 'क्विंटल' : language === 'hi' ? 'क्विंटल' : 'Quintals'} @ ₹2,425 / Q
           </div>
 
           <div className="mt-6 pt-5 border-t border-gray-100 text-left space-y-2.5 text-xs sm:text-sm">
             <div className="flex justify-between py-1 border-b border-gray-50">
-              <span className="text-gray-500 font-medium">Receipt No:</span>
+              <span className="text-gray-500 font-medium">{language === 'mr' ? 'पावती क्रमांक' : language === 'hi' ? 'रसीद संख्या' : 'Receipt No'}:</span>
               <span className="font-mono font-bold text-gray-900">{receiptData.receiptId}</span>
             </div>
             <div className="flex justify-between py-1 border-b border-gray-50">
-              <span className="text-gray-500 font-medium">Farmer:</span>
+              <span className="text-gray-500 font-medium">{language === 'mr' ? 'शेतकरी' : language === 'hi' ? 'किसान' : 'Farmer'}:</span>
               <span className="font-bold text-gray-900">{receiptData.farmerName} ({receiptData.farmerId})</span>
             </div>
             <div className="flex justify-between py-1 border-b border-gray-50">
-              <span className="text-gray-500 font-medium">Center:</span>
+              <span className="text-gray-500 font-medium">{language === 'mr' ? 'खरेदी केंद्र' : language === 'hi' ? 'खरीद केंद्र' : 'Center'}:</span>
               <span className="font-bold text-gray-900 truncate max-w-[240px]">{receiptData.center}</span>
             </div>
             <div className="flex justify-between py-1 border-b border-gray-50">
-              <span className="text-gray-500 font-medium">Procurement Date:</span>
+              <span className="text-gray-500 font-medium">{language === 'mr' ? 'खरेदी दिनांक' : language === 'hi' ? 'खरीद दिनांक' : 'Procurement Date'}:</span>
               <span className="font-bold text-gray-900">{receiptData.date}</span>
             </div>
             <div className="flex justify-between py-1">
-              <span className="text-gray-500 font-medium">Payment Status:</span>
-              <span className="font-black text-emerald-700">● Initiated (Direct Benefit Transfer)</span>
+              <span className="text-gray-500 font-medium">{language === 'mr' ? 'पेमेंट स्थिती' : language === 'hi' ? 'भुगतान स्थिति' : 'Payment Status'}:</span>
+              <span className="font-black text-emerald-700">● {language === 'mr' ? 'सुरू केले (थेट बँक जमा DBT)' : language === 'hi' ? 'प्रारंभ (सीधा बैंक अंतरण DBT)' : 'Initiated (Direct Benefit Transfer)'}</span>
             </div>
           </div>
         </div>
@@ -104,7 +108,7 @@ export const ProcurementComplete: React.FC = () => {
           {/* Action Buttons */}
           <div className="bg-white rounded-3xl p-6 border border-gray-200 shadow-soft space-y-3">
             <h3 className="text-xs font-black uppercase tracking-wider text-gray-500 mb-2">
-              Next Action
+              {language === 'mr' ? 'पुढील कृती' : language === 'hi' ? 'अगली कार्रवाई' : 'Next Action'}
             </h3>
 
             <button
@@ -129,7 +133,7 @@ export const ProcurementComplete: React.FC = () => {
                 className="py-3 px-4 rounded-2xl bg-gray-50 hover:bg-gray-100 text-gray-800 font-bold text-xs border border-gray-200 shadow-xs flex items-center justify-center gap-2 active:scale-95 transition"
               >
                 <Printer className="w-4 h-4 text-green-700" />
-                <span>Print Receipt</span>
+                <span>{language === 'mr' ? 'पावती प्रिंट करा' : language === 'hi' ? 'रसीद प्रिंट करें' : 'Print Receipt'}</span>
               </button>
             </div>
           </div>

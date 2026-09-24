@@ -7,7 +7,6 @@ import { BottomNav } from './components/BottomNav';
 import { DemoFlowBar } from './components/DemoFlowBar';
 
 import { WelcomeLanding } from './pages/WelcomeLanding';
-import { LanguageSelection } from './pages/LanguageSelection';
 import { FarmerRegistration } from './pages/FarmerRegistration';
 import { FarmerHome } from './pages/FarmerHome';
 import { FindCenter } from './pages/FindCenter';
@@ -43,7 +42,7 @@ export function App() {
               <Routes>
                 {/* 16 Farmer Screens */}
                 <Route path="/" element={<WelcomeLanding />} />
-                <Route path="/languages" element={<LanguageSelection />} />
+                <Route path="/languages" element={<Navigate to="/dashboard" replace />} />
                 <Route path="/login" element={<FarmerRegistration />} />
                 <Route path="/dashboard" element={<FarmerHome />} />
                 <Route path="/centers" element={<FindCenter />} />

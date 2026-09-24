@@ -85,16 +85,14 @@ export const FarmerRegistration: React.FC = () => {
               style={{ width: step === 1 ? '50%' : '100%' }}
             />
           </div>
-        </div>
-
-        <div className="mb-6">
+        </div>        <div className="mb-6">
           <h1 className="text-2xl font-extrabold text-green-950">
-            {step === 1 ? t('farmer_login') : 'ओटीपी पडताळणी / Verify OTP'}
+            {step === 1 ? t('farmer_login') : (language === 'mr' ? 'ओटीपी पडताळणी' : language === 'hi' ? 'ओटीपी सत्यापन' : 'Verify OTP')}
           </h1>
           <p className="text-xs text-gray-600 mt-1">
             {step === 1 
-              ? (language === 'mr' ? 'शासकीय नोंदणीकृत माहिती भरा' : 'Enter your registered details to continue')
-              : (language === 'mr' ? 'मोबाईलवर आलेला ६ अंकी ओटीपी टाका' : 'Enter 6-digit OTP sent to registered number')
+              ? (language === 'mr' ? 'शासकीय नोंदणीकृत माहिती भरा' : language === 'hi' ? 'सरकारी पंजीकृत विवरण दर्ज करें' : 'Enter your registered details to continue')
+              : (language === 'mr' ? 'मोबाईलवर आलेला ६ अंकी ओटीपी टाका' : language === 'hi' ? 'मोबाइल पर प्राप्त 6 अंकों का ओटीपी दर्ज करें' : 'Enter 6-digit OTP sent to registered number')
             }
           </p>
         </div>
@@ -131,7 +129,7 @@ export const FarmerRegistration: React.FC = () => {
             {/* Farmer Name */}
             <div>
               <label className="block text-xs font-bold text-gray-700 mb-1">
-                {language === 'mr' ? 'शेतकऱ्याचे नाव' : 'Farmer Name'}
+                {language === 'mr' ? 'शेतकऱ्याचे नाव' : language === 'hi' ? 'किसान का नाम' : 'Farmer Name'}
               </label>
               <input
                 type="text"
@@ -144,7 +142,7 @@ export const FarmerRegistration: React.FC = () => {
             {/* Mobile Number */}
             <div>
               <label className="block text-xs font-bold text-gray-700 mb-1">
-                {language === 'mr' ? 'मोबाईल नंबर' : 'Mobile Number'} *
+                {language === 'mr' ? 'मोबाईल नंबर' : language === 'hi' ? 'मोबाइल नंबर' : 'Mobile Number'} *
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-green-700">
@@ -155,7 +153,7 @@ export const FarmerRegistration: React.FC = () => {
                   required
                   value={formData.mobile}
                   onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
-                  className="w-full pl-11 pr-4 py-3 bg-white border border-gray-200 rounded-2xl text-sm font-semibold text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-600 shadow-xs"
+                  className="w-full pl-11 pr-4 py-3.5 bg-white border border-gray-200 rounded-2xl text-sm font-semibold text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-600 shadow-xs"
                 />
               </div>
             </div>
@@ -164,7 +162,7 @@ export const FarmerRegistration: React.FC = () => {
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <label className="block text-xs font-bold text-gray-700 mb-1">
-                  {language === 'mr' ? 'गाव' : 'Village'}
+                  {language === 'mr' ? 'गाव' : language === 'hi' ? 'गांव' : 'Village'}
                 </label>
                 <input
                   type="text"
@@ -176,7 +174,7 @@ export const FarmerRegistration: React.FC = () => {
 
               <div>
                 <label className="block text-xs font-bold text-gray-700 mb-1">
-                  {language === 'mr' ? 'जिल्हा' : 'District'}
+                  {language === 'mr' ? 'जिल्हा' : language === 'hi' ? 'जिला' : 'District'}
                 </label>
                 <input
                   type="text"
@@ -190,7 +188,7 @@ export const FarmerRegistration: React.FC = () => {
             {/* Main Crop Select */}
             <div>
               <label className="block text-xs font-bold text-gray-700 mb-1">
-                {language === 'mr' ? 'प्रमुख पीक' : 'Main Crop'}
+                {language === 'mr' ? 'प्रमुख पीक' : language === 'hi' ? 'प्रमुख फसल' : 'Main Crop'}
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-green-700">
@@ -201,11 +199,11 @@ export const FarmerRegistration: React.FC = () => {
                   onChange={(e) => setFormData({ ...formData, crop: e.target.value })}
                   className="w-full pl-11 pr-4 py-3 bg-white border border-gray-200 rounded-2xl text-sm font-semibold text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-600 shadow-xs appearance-none"
                 >
-                  <option value="Wheat">Wheat / गहू</option>
-                  <option value="Cotton">Cotton / कापूस</option>
-                  <option value="Rice">Rice / भात (धान)</option>
-                  <option value="Soybean">Soybean / सोयाबीन</option>
-                  <option value="Jowar">Jowar / ज्वारी</option>
+                  <option value="Wheat">{language === 'mr' ? 'गहू (Wheat)' : language === 'hi' ? 'गेहूं (Wheat)' : 'Wheat'}</option>
+                  <option value="Cotton">{language === 'mr' ? 'कापूस (Cotton)' : language === 'hi' ? 'कपास (Cotton)' : 'Cotton'}</option>
+                  <option value="Rice">{language === 'mr' ? 'भात (Rice)' : language === 'hi' ? 'चावल (Rice)' : 'Rice'}</option>
+                  <option value="Soybean">{language === 'mr' ? 'सोयाबीन (Soybean)' : language === 'hi' ? 'सोयाबीन (Soybean)' : 'Soybean'}</option>
+                  <option value="Jowar">{language === 'mr' ? 'ज्वारी (Jowar)' : language === 'hi' ? 'ज्वार (Jowar)' : 'Jowar'}</option>
                 </select>
               </div>
             </div>
@@ -252,7 +250,7 @@ export const FarmerRegistration: React.FC = () => {
                 onClick={() => setStep(1)}
                 className="w-1/3 py-3.5 rounded-2xl bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold text-sm"
               >
-                Back
+                {language === 'mr' ? 'मागे' : language === 'hi' ? 'पीछे' : 'Back'}
               </button>
 
               <button
@@ -260,7 +258,9 @@ export const FarmerRegistration: React.FC = () => {
                 disabled={isSubmitting}
                 className="w-2/3 py-3.5 rounded-2xl bg-green-700 hover:bg-green-800 text-white font-bold text-sm shadow-soft-lg flex items-center justify-center gap-2 active:scale-98 transition disabled:opacity-60"
               >
-                {isSubmitting ? 'Verifying...' : t('verify_continue')}
+                {isSubmitting 
+                  ? (language === 'mr' ? 'पडताळणी सुरू...' : language === 'hi' ? 'सत्यापन जारी...' : 'Verifying...') 
+                  : t('verify_continue')}
                 <ArrowRight className="w-4 h-4 stroke-[2.5]" />
               </button>
             </div>
@@ -270,7 +270,11 @@ export const FarmerRegistration: React.FC = () => {
       </div>
 
       <div className="text-center text-[11px] text-gray-400 mt-6">
-        Department of Agriculture & Farmers Welfare • Government of Maharashtra
+        {language === 'mr' 
+          ? 'कृषी व शेतकरी कल्याण विभाग • महाराष्ट्र शासन' 
+          : language === 'hi' 
+          ? 'कृषि एवं किसान कल्याण विभाग • महाराष्ट्र शासन' 
+          : 'Department of Agriculture & Farmers Welfare • Government of Maharashtra'}
       </div>
     </div>
   );

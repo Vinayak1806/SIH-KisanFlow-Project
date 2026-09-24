@@ -1,4 +1,4 @@
-# KisanFlow (किसानफ्लो) 🌾
+# KisanFlow 🧑‍🌾🌾
 ### Smart Farmer Registration, Virtual Queue and Agricultural Procurement Management System
 
 **Smart India Hackathon (SIH 2026)**

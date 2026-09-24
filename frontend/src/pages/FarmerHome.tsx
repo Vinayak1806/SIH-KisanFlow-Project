@@ -43,6 +43,8 @@ export const FarmerHome: React.FC = () => {
     if ('speechSynthesis' in window) {
       const msgText = language === 'mr'
         ? "नमस्कार रामभाऊ. तुमचे टोकन क्रमांक के एफ २०२६-०००१२३ आहे. तुमचा रांगेतील क्रमांक बारा असून अंदाजे पंचवीस मिनिटांचा वेळ लागेल."
+        : language === 'hi'
+        ? "नमस्ते राजेशजी. आपका टोकन क्रमांक केएफ २०२६-०००१२३ है। आपका कतार क्रमांक १२ है और अनुमानित २५ मिनट का समय लगेगा।"
         : "Namaste Rajeshji. Your token KF-2026-000123 is at queue position 12 with an estimated wait time of 25 minutes.";
       
       const utterance = new SpeechSynthesisUtterance(msgText);
@@ -56,10 +58,10 @@ export const FarmerHome: React.FC = () => {
   };
 
   const cropPrices = [
-    { name: language === 'mr' ? 'गहू (Wheat)' : 'Wheat', price: '₹2,425', msp: 'MSP ₹2,425', trend: '+₹150 / Q' },
-    { name: language === 'mr' ? 'कापूस (Cotton)' : 'Cotton', price: '₹7,100', msp: 'MSP ₹7,020', trend: '+₹80 / Q' },
-    { name: language === 'mr' ? 'भात (Rice)' : 'Rice', price: '₹2,369', msp: 'MSP ₹2,369', trend: 'MSP Official' },
-    { name: language === 'mr' ? 'सोयाबीन (Soybean)' : 'Soybean', price: '₹4,892', msp: 'MSP ₹4,892', trend: '+₹110 / Q' },
+    { name: language === 'mr' ? 'गहू (Wheat)' : language === 'hi' ? 'गेहूं (Wheat)' : 'Wheat', price: '₹2,425', msp: 'MSP ₹2,425', trend: '+₹150 / Q' },
+    { name: language === 'mr' ? 'कापूस (Cotton)' : language === 'hi' ? 'कपास (Cotton)' : 'Cotton', price: '₹7,100', msp: 'MSP ₹7,020', trend: '+₹80 / Q' },
+    { name: language === 'mr' ? 'भात (Rice)' : language === 'hi' ? 'चावल (Rice)' : 'Rice', price: '₹2,369', msp: 'MSP ₹2,369', trend: 'MSP Official' },
+    { name: language === 'mr' ? 'सोयाबीन (Soybean)' : language === 'hi' ? 'सोयाबीन (Soybean)' : 'Soybean', price: '₹4,892', msp: 'MSP ₹4,892', trend: '+₹110 / Q' },
   ];
 
   return (
@@ -70,14 +72,14 @@ export const FarmerHome: React.FC = () => {
         <div>
           <div className="flex items-center gap-2">
             <h1 className="text-2xl sm:text-3xl font-black text-green-950 tracking-tight">
-              {t('greeting')}, {user?.name ? user.name.split(' ')[0] : 'रामभाऊ'} 👋
+              {t('greeting')}, {user?.name ? user.name.split(' ')[0] : (language === 'mr' ? 'रामभाऊ' : language === 'hi' ? 'राजेशजी' : 'Rajesh')} 👋
             </h1>
             <span className="text-xs font-bold bg-green-100 text-green-800 px-2.5 py-0.5 rounded-full">
               FARM1001
             </span>
           </div>
           <p className="text-xs sm:text-sm font-semibold text-gray-500 mt-1">
-            {t('welcome_sub')} • District Pune, Maharashtra
+            {t('welcome_sub')} • {t('district_pune')}
           </p>
         </div>
 
@@ -85,7 +87,7 @@ export const FarmerHome: React.FC = () => {
         <div className="flex items-center gap-3">
           <div className="hidden md:flex items-center gap-2 px-3 py-2 bg-emerald-50 rounded-2xl border border-emerald-200 text-xs font-bold text-emerald-900">
             <Sun className="w-4 h-4 text-amber-500" />
-            <span>Mandi Open: 08:00 AM – 06:00 PM</span>
+            <span>{t('mandi_open')}</span>
           </div>
 
           <button
@@ -99,7 +101,7 @@ export const FarmerHome: React.FC = () => {
           >
             <Volume2 className="w-5 h-5 stroke-[2.2]" />
             <span className="text-xs font-bold">
-              {voicePlaying ? 'वाचत आहे...' : '🔊 ऐका (Voice Briefing)'}
+              {voicePlaying ? t('reading_voice') : t('listen_voice')}
             </span>
           </button>
         </div>
@@ -116,7 +118,7 @@ export const FarmerHome: React.FC = () => {
             <div className="text-xs uppercase font-extrabold tracking-wider text-green-900 mb-2 px-1 flex items-center justify-between">
               <span>{t('your_next_step')}</span>
               <span className="text-[10px] bg-green-100 text-green-800 px-2.5 py-0.5 rounded-full font-bold">
-                Real-Time APMC Yard Sync
+                {language === 'mr' ? 'थेट बाजार समिती अपडेट' : language === 'hi' ? 'लाइव मंडी अपडेट' : 'Real-Time APMC Yard Sync'}
               </span>
             </div>
 
@@ -130,7 +132,7 @@ export const FarmerHome: React.FC = () => {
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
                   <div>
                     <span className="text-[10px] font-bold uppercase tracking-wider bg-white/15 px-3 py-1 rounded-full text-green-100">
-                      Active Virtual Token
+                      {t('active_token_badge')}
                     </span>
                     <div className="text-2xl sm:text-3xl font-black tracking-wider mt-1.5 text-white font-mono">
                       {activeToken.token_id}
@@ -139,7 +141,7 @@ export const FarmerHome: React.FC = () => {
 
                   <div className="sm:text-right">
                     <span className="text-xs sm:text-sm font-bold text-amber-300 block">
-                      {activeToken.crop_name} • {activeToken.quantity} Quintals
+                      {activeToken.crop_name} • {activeToken.quantity} {language === 'mr' ? 'क्विंटल' : language === 'hi' ? 'क्विंटल' : 'Quintals'}
                     </span>
                     <span className="text-xs text-green-200 block mt-0.5">
                       {activeToken.center_name}
@@ -175,7 +177,7 @@ export const FarmerHome: React.FC = () => {
                       onClick={() => navigate('/token')}
                       className="px-3.5 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 text-white font-bold text-xs backdrop-blur-xs transition"
                     >
-                      QR Pass
+                      {language === 'mr' ? 'क्युआर पास' : language === 'hi' ? 'क्यूआर पास' : 'QR Pass'}
                     </button>
                     <button
                       onClick={() => navigate('/queue')}
@@ -194,7 +196,11 @@ export const FarmerHome: React.FC = () => {
                   {t('find_procurement_center')}
                 </h2>
                 <p className="text-xs sm:text-sm text-gray-500 mt-1">
-                  Check real-time wait times, official prices, and book your hassle-free time slot.
+                  {language === 'mr' 
+                    ? 'थेट गर्दी, हमीभाव तपासा आणि सोयीची वेळ आरक्षित करा.' 
+                    : language === 'hi'
+                    ? 'लाइव प्रतीक्षा समय, सरकारी समर्थन मूल्य देखें और स्लॉट बुक करें।'
+                    : 'Check real-time wait times, official prices, and book your hassle-free time slot.'}
                 </p>
                 <button
                   onClick={() => navigate('/centers')}
@@ -224,7 +230,7 @@ export const FarmerHome: React.FC = () => {
                 <span className="text-xs font-bold text-center leading-tight">
                   {t('action_token')}
                 </span>
-                <span className="text-[10px] text-gray-400 mt-0.5">Book Slot</span>
+                <span className="text-[10px] text-gray-400 mt-0.5">{t('book_slot')}</span>
               </button>
 
               <button
@@ -237,7 +243,7 @@ export const FarmerHome: React.FC = () => {
                 <span className="text-xs font-bold text-center leading-tight">
                   {t('action_center')}
                 </span>
-                <span className="text-[10px] text-gray-400 mt-0.5">6 Yards Nearby</span>
+                <span className="text-[10px] text-gray-400 mt-0.5">{t('six_yards_nearby')}</span>
               </button>
 
               <button
@@ -250,7 +256,7 @@ export const FarmerHome: React.FC = () => {
                 <span className="text-xs font-bold text-center leading-tight">
                   {t('recommended')}
                 </span>
-                <span className="text-[10px] text-gray-400 mt-0.5">AI Best Choice</span>
+                <span className="text-[10px] text-gray-400 mt-0.5">{t('ai_best_choice')}</span>
               </button>
 
               <button
@@ -263,7 +269,7 @@ export const FarmerHome: React.FC = () => {
                 <span className="text-xs font-bold text-center leading-tight">
                   {t('action_history')}
                 </span>
-                <span className="text-[10px] text-gray-400 mt-0.5">Past Sales</span>
+                <span className="text-[10px] text-gray-400 mt-0.5">{t('past_sales')}</span>
               </button>
             </div>
           </div>
@@ -280,10 +286,12 @@ export const FarmerHome: React.FC = () => {
                 <h2 className="text-sm font-extrabold text-green-950">
                   {t('today_crop_prices')}
                 </h2>
-                <p className="text-[11px] text-gray-500">Government Minimum Support Prices</p>
+                <p className="text-[11px] text-gray-500">
+                  {language === 'mr' ? 'शासकीय किमान आधारभूत हमीभाव' : language === 'hi' ? 'सरकारी न्यूनतम समर्थन मूल्य' : 'Government Minimum Support Prices'}
+                </p>
               </div>
               <span className="text-[10px] text-green-700 font-bold bg-green-50 px-2.5 py-1 rounded-full border border-green-200">
-                Live MSP
+                {language === 'mr' ? 'थेट हमीभाव' : language === 'hi' ? 'लाइव एमएसपी' : 'Live MSP'}
               </span>
             </div>
 
@@ -306,7 +314,7 @@ export const FarmerHome: React.FC = () => {
                       {crop.price}
                     </span>
                     <span className="text-[9px] font-bold text-emerald-700 bg-emerald-100/70 px-1.5 py-0.5 rounded-md">
-                      / quintal
+                      {language === 'mr' ? '/ क्विंटल' : language === 'hi' ? '/ क्विंटल' : '/ quintal'}
                     </span>
                   </div>
                 </div>
@@ -321,7 +329,7 @@ export const FarmerHome: React.FC = () => {
                 {t('recent_activity')}
               </h2>
               <button onClick={() => navigate('/history')} className="text-xs text-green-700 font-bold hover:underline">
-                View All
+                {t('view_all')}
               </button>
             </div>
 
@@ -333,7 +341,7 @@ export const FarmerHome: React.FC = () => {
                   </div>
                   <div>
                     <div className="text-xs font-bold text-gray-900">
-                      {language === 'mr' ? 'टोकन तयार केले' : 'Token Booked'}
+                      {t('token_booked')}
                     </div>
                     <div className="text-[10px] text-gray-500">
                       KF-2026-000123 • Pune Center
@@ -341,7 +349,7 @@ export const FarmerHome: React.FC = () => {
                   </div>
                 </div>
                 <span className="text-[10px] font-bold text-green-700 bg-green-100 px-2.5 py-1 rounded-md">
-                  Position #12
+                  {t('queue_position')} #12
                 </span>
               </div>
 
@@ -352,7 +360,7 @@ export const FarmerHome: React.FC = () => {
                   </div>
                   <div>
                     <div className="text-xs font-bold text-gray-900">
-                      {language === 'mr' ? 'मागील खरेदी व पेमेंट जमा' : 'Procurement DBT Complete'}
+                      {t('procurement_dbt_complete')}
                     </div>
                     <div className="text-[10px] text-gray-500">
                       ₹83,905 • 34.6 Q Wheat
@@ -360,7 +368,7 @@ export const FarmerHome: React.FC = () => {
                   </div>
                 </div>
                 <span className="text-[10px] font-bold text-blue-700 bg-blue-100 px-2.5 py-1 rounded-md">
-                  Paid ✓
+                  {language === 'mr' ? 'जमा ✓' : language === 'hi' ? 'जमा ✓' : 'Paid ✓'}
                 </span>
               </div>
             </div>

@@ -62,7 +62,11 @@ export const TokenBooking: React.FC = () => {
           {t('book_slot_title')}
         </h1>
         <p className="text-xs sm:text-sm text-gray-500 mt-1">
-          {language === 'mr' ? 'खरेदी केंद्रावर माल आणण्याची वेळ आरक्षित करा' : 'Select convenient slot to avoid yard congestion'}
+          {language === 'mr' 
+            ? 'खरेदी केंद्रावर माल आणण्याची वेळ आरक्षित करा' 
+            : language === 'hi' 
+            ? 'खरीद केंद्र पर उपज लाने का समय आरक्षित करें' 
+            : 'Select convenient slot to avoid yard congestion'}
         </p>
       </div>
 
@@ -73,14 +77,18 @@ export const TokenBooking: React.FC = () => {
         <div className="space-y-5">
           {/* Selected Center Summary Card */}
           <div className="bg-white p-5 rounded-3xl border border-green-200 shadow-soft">
-            <div className="text-[10px] uppercase font-bold text-gray-400">Selected Procurement Yard</div>
+            <div className="text-[10px] uppercase font-bold text-gray-400">
+              {language === 'mr' ? 'निवडलेले खरेदी केंद्र' : language === 'hi' ? 'चयनित खरीद केंद्र' : 'Selected Procurement Yard'}
+            </div>
             <div className="text-base font-extrabold text-gray-900 mt-1 flex items-center gap-1.5">
               <MapPin className="w-4 h-4 text-green-700 shrink-0" />
               <span>{centerName}</span>
             </div>
             <div className="text-xs text-green-700 font-bold mt-1.5 flex items-center gap-1">
               <CheckCircle2 className="w-3.5 h-3.5" />
-              <span>Official Government APMC Electronic Weighbridge</span>
+              <span>
+                {language === 'mr' ? 'शासकीय मान्यताप्राप्त बाजार समिती इलेक्ट्रॉनिक वजन काटा' : language === 'hi' ? 'सरकारी मान्यता प्राप्त मंडी इलेक्ट्रॉनिक तौल कांटा' : 'Official Government APMC Electronic Weighbridge'}
+              </span>
             </div>
           </div>
 
@@ -88,14 +96,14 @@ export const TokenBooking: React.FC = () => {
           <div className="bg-white p-6 rounded-3xl border border-gray-200 shadow-soft space-y-5">
             <div>
               <label className="block text-xs font-bold text-gray-700 mb-2">
-                {language === 'mr' ? 'पीक निवडा' : 'Crop to Sell'}
+                {language === 'mr' ? 'पीक निवडा' : language === 'hi' ? 'फसल चुनें' : 'Crop to Sell'}
               </label>
               <div className="grid grid-cols-2 gap-2.5">
                 {[
-                  { id: 1, name: "Wheat (गहू)", rate: "₹2,425/Q" },
-                  { id: 2, name: "Cotton (कापूस)", rate: "₹7,100/Q" },
-                  { id: 3, name: "Rice (भात)", rate: "₹2,369/Q" },
-                  { id: 4, name: "Soybean (सोयाबीन)", rate: "₹4,892/Q" },
+                  { id: 1, name: language === 'mr' ? 'गहू (Wheat)' : language === 'hi' ? 'गेहूं (Wheat)' : 'Wheat', rate: '₹2,425/Q' },
+                  { id: 2, name: language === 'mr' ? 'कापूस (Cotton)' : language === 'hi' ? 'कपास (Cotton)' : 'Cotton', rate: '₹7,100/Q' },
+                  { id: 3, name: language === 'mr' ? 'भात (Rice)' : language === 'hi' ? 'चावल (Rice)' : 'Rice', rate: '₹2,369/Q' },
+                  { id: 4, name: language === 'mr' ? 'सोयाबीन (Soybean)' : language === 'hi' ? 'सोयाबीन (Soybean)' : 'Soybean', rate: '₹4,892/Q' },
                 ].map(c => (
                   <button
                     key={c.id}
@@ -118,10 +126,10 @@ export const TokenBooking: React.FC = () => {
             <div>
               <div className="flex justify-between items-center mb-2">
                 <label className="text-xs font-bold text-gray-700">
-                  {t('expected_weight')} (Quintals)
+                  {t('expected_weight')} ({language === 'mr' ? 'क्विंटल' : language === 'hi' ? 'क्विंटल' : 'Quintals'})
                 </label>
                 <span className="text-xs sm:text-sm font-black text-green-800 bg-green-100 px-3 py-1 rounded-xl">
-                  {quantity} Quintals (~{quantity * 100} kg)
+                  {quantity} {language === 'mr' ? 'क्विंटल' : language === 'hi' ? 'क्विंटल' : 'Quintals'} (~{quantity * 100} kg)
                 </span>
               </div>
               <input
@@ -193,7 +201,9 @@ export const TokenBooking: React.FC = () => {
                       <Clock className={`w-4 h-4 ${isSelected ? 'text-green-700' : 'text-gray-400'}`} />
                       <div>
                         <div className="text-xs sm:text-sm font-bold">{s.time}</div>
-                        <div className="text-[10px] text-gray-500">{s.capacity} available</div>
+                        <div className="text-[10px] text-gray-500">
+                          {s.capacity} {language === 'mr' ? 'उपलब्ध' : language === 'hi' ? 'उपलब्ध' : 'available'}
+                        </div>
                       </div>
                     </div>
 
@@ -206,7 +216,7 @@ export const TokenBooking: React.FC = () => {
                           : 'bg-emerald-100 text-emerald-800'
                       }`}
                     >
-                      {isFull ? 'Full' : s.status === 'limited' ? t('limited') : t('available')}
+                      {isFull ? (language === 'mr' ? 'पूर्ण' : language === 'hi' ? 'फुल' : 'Full') : s.status === 'limited' ? t('limited') : t('available')}
                     </span>
                   </button>
                 );

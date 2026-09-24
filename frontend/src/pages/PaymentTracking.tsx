@@ -11,10 +11,26 @@ export const PaymentTracking: React.FC = () => {
   const navigate = useNavigate();
 
   const paymentSteps = [
-    { label: "Procurement Accepted", time: "24 Sep, 10:45 AM", done: true },
-    { label: "Receipt Generated (RCPT-2026-00123)", time: "24 Sep, 10:46 AM", done: true },
-    { label: "PFMS Treasury Sanction", time: "24 Sep, 10:48 AM", done: true },
-    { label: "Direct Benefit Transfer (DBT) Settled", time: "24 Sep, 10:50 AM", done: true },
+    { 
+      label: language === 'mr' ? 'शेतमाल खरेदी स्वीकारली' : language === 'hi' ? 'उपज खरीद स्वीकृत' : 'Procurement Accepted', 
+      time: "24 Sep, 10:45 AM", 
+      done: true 
+    },
+    { 
+      label: language === 'mr' ? 'पावती तयार केली (RCPT-2026-00123)' : language === 'hi' ? 'रसीद तैयार की गई (RCPT-2026-00123)' : 'Receipt Generated (RCPT-2026-00123)', 
+      time: "24 Sep, 10:46 AM", 
+      done: true 
+    },
+    { 
+      label: language === 'mr' ? 'पीएफएमएस (PFMS) कोषागार मंजुरी' : language === 'hi' ? 'पीएफएमएस (PFMS) कोषागार स्वीकृति' : 'PFMS Treasury Sanction', 
+      time: "24 Sep, 10:48 AM", 
+      done: true 
+    },
+    { 
+      label: language === 'mr' ? 'थेट बँक खात्यात रक्कम वर्ग (DBT)' : language === 'hi' ? 'सीधा बैंक अंतरण (DBT) पूर्ण' : 'Direct Benefit Transfer (DBT) Settled', 
+      time: "24 Sep, 10:50 AM", 
+      done: true 
+    },
   ];
 
   return (
@@ -36,7 +52,7 @@ export const PaymentTracking: React.FC = () => {
         {/* Left Column: Amount Hero Card & Bank Details */}
         <div className="lg:col-span-6 bg-white rounded-3xl p-6 sm:p-8 border-2 border-green-700/60 shadow-token text-center">
           <div className="text-xs font-bold uppercase tracking-wider text-gray-400">
-            Credited to Bank Account
+            {language === 'mr' ? 'बँक खात्यात थेट जमा' : language === 'hi' ? 'बैंक खाते में सीधा जमा' : 'Credited to Bank Account'}
           </div>
           
           <div className="text-4xl sm:text-5xl font-black text-green-900 my-2 font-mono">
@@ -51,19 +67,19 @@ export const PaymentTracking: React.FC = () => {
           {/* Bank & UTR Details */}
           <div className="mt-6 p-4 bg-gray-50 rounded-2xl border border-gray-100 text-left text-xs sm:text-sm space-y-2.5">
             <div className="flex justify-between py-0.5">
-              <span className="text-gray-500">Beneficiary Name:</span>
-              <span className="font-extrabold text-gray-900">Rajesh Baburao Pawar</span>
+              <span className="text-gray-500">{language === 'mr' ? 'लाभार्थ्याचे नाव' : language === 'hi' ? 'लाभार्थी का नाम' : 'Beneficiary Name'}:</span>
+              <span className="font-extrabold text-gray-900">{language === 'mr' ? 'राजेश बाबुराव पवार' : language === 'hi' ? 'राजेश बाबूराव पवार' : 'Rajesh Baburao Pawar'}</span>
             </div>
             <div className="flex justify-between py-0.5">
-              <span className="text-gray-500">Bank & Account:</span>
-              <span className="font-bold text-gray-900">Bank of Maharashtra (****4912)</span>
+              <span className="text-gray-500">{language === 'mr' ? 'बँक व खाते क्रमांक' : language === 'hi' ? 'बैंक एवं खाता संख्या' : 'Bank & Account'}:</span>
+              <span className="font-bold text-gray-900">{language === 'mr' ? 'बँक ऑफ महाराष्ट्र (****४९१२)' : language === 'hi' ? 'बैंक ऑफ महाराष्ट्र (****4912)' : 'Bank of Maharashtra (****4912)'}</span>
             </div>
             <div className="flex justify-between py-0.5">
-              <span className="text-gray-500">Aadhaar Reference:</span>
+              <span className="text-gray-500">{language === 'mr' ? 'आधार संदर्भ' : language === 'hi' ? 'आधार संदर्भ' : 'Aadhaar Reference'}:</span>
               <span className="font-mono font-bold text-gray-800">XXXX-XXXX-8921 (NPCI Linked)</span>
             </div>
             <div className="flex justify-between border-t pt-2 mt-2">
-              <span className="text-gray-500">DBT / UTR Number:</span>
+              <span className="text-gray-500">{language === 'mr' ? 'डीबीटी / युटीआर क्रमांक' : language === 'hi' ? 'डीबीटी / यूटीआर संख्या' : 'DBT / UTR Number'}:</span>
               <span className="font-mono font-bold text-green-800">UTR20260924981240</span>
             </div>
           </div>
@@ -75,7 +91,7 @@ export const PaymentTracking: React.FC = () => {
           {/* Timeline Steps */}
           <div className="bg-white rounded-3xl p-6 border border-gray-200 shadow-soft">
             <h2 className="text-xs uppercase font-extrabold tracking-wider text-gray-500 mb-5 px-1">
-              Transaction Progression
+              {language === 'mr' ? 'व्यवहार प्रगती' : language === 'hi' ? 'लेन-देन प्रगति' : 'Transaction Progression'}
             </h2>
 
             <div className="space-y-5 relative before:absolute before:inset-0 before:left-3.5 before:h-full before:w-0.5 before:bg-green-600">
@@ -98,7 +114,7 @@ export const PaymentTracking: React.FC = () => {
             onClick={() => navigate('/dashboard')}
             className="w-full py-4 rounded-2xl bg-green-700 hover:bg-green-800 text-white font-extrabold text-sm shadow-soft-lg flex items-center justify-center gap-2 active:scale-98 transition"
           >
-            <span>Back to Home Dashboard ➔</span>
+            <span>{language === 'mr' ? 'मुख्यपृष्ठावर परत जा ➔' : language === 'hi' ? 'होम डैशबोर्ड पर लौटें ➔' : 'Back to Home Dashboard ➔'}</span>
           </button>
 
         </div>

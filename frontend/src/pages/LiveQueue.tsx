@@ -75,18 +75,22 @@ export const LiveQueue: React.FC = () => {
             <span>{t('live_queue')}</span>
           </h1>
           <p className="text-xs sm:text-sm text-gray-500 mt-1">
-            Pune Agriculture Procurement Center Yard • Real-Time Automated Queue Sync
+            {language === 'mr' 
+              ? 'पुणे कृषी उत्पन्न बाजार समिती • थेट स्वयंचलित रांग' 
+              : language === 'hi'
+              ? 'पुणे कृषि उपज मंडी • लाइव स्वचालित कतार'
+              : 'Pune Agriculture Procurement Center Yard • Real-Time Automated Queue Sync'}
           </p>
         </div>
 
-        {/* SIH Simulation Trigger */}
+        {/* Simulation Trigger */}
         <button
           onClick={handleSimulateAdvance}
           className="px-4 py-2.5 rounded-2xl bg-amber-100 text-amber-900 font-bold text-xs border border-amber-300 hover:bg-amber-200 active:scale-95 transition flex items-center gap-2 shadow-xs shrink-0 self-start sm:self-center"
           title="Simulate Queue Movement for Evaluation"
         >
           <RefreshCw className="w-4 h-4 text-amber-700 animate-spin" />
-          <span>Advance Queue (#12 ➔ #11)</span>
+          <span>{language === 'mr' ? 'रांग पुढे सरकवा (#१२ ➔ #११)' : language === 'hi' ? 'कतार आगे बढ़ाएं (#12 ➔ #11)' : 'Advance Queue (#12 ➔ #11)'}</span>
         </button>
       </div>
 
@@ -96,9 +100,11 @@ export const LiveQueue: React.FC = () => {
           <div className="flex items-center gap-3">
             <Bell className="w-6 h-6 text-white animate-bounce shrink-0" />
             <div>
-              <div className="text-sm font-black">Your position changed! / तुमची पाळी पुढे सरकली आहे!</div>
+              <div className="text-sm font-black">
+                {language === 'mr' ? 'तुमची पाळी पुढे सरकली आहे!' : language === 'hi' ? 'आपकी बारी आगे बढ़ गई है!' : 'Your position changed!'}
+              </div>
               <div className="text-xs font-semibold opacity-90 mt-0.5">
-                Position #{prevPosition} ➔ #{position} ({waitMinutes} min remaining)
+                #{prevPosition} ➔ #{position} ({waitMinutes} {language === 'mr' ? 'मिनिटे शिल्लक' : language === 'hi' ? 'मिनट शेष' : 'min remaining'})
               </div>
             </div>
           </div>
@@ -112,7 +118,7 @@ export const LiveQueue: React.FC = () => {
         {/* Left: Big Position Card (6 cols) */}
         <div className="lg:col-span-6 bg-white rounded-3xl p-6 sm:p-8 border-2 border-green-700/60 shadow-token text-center relative overflow-hidden">
           <div className="text-xs font-extrabold uppercase tracking-widest text-green-800">
-            Your Current Turn Number
+            {language === 'mr' ? 'तुमचा सध्याचा रांगेतील क्रमांक' : language === 'hi' ? 'आपका वर्तमान कतार क्रमांक' : 'Your Current Turn Number'}
           </div>
 
           {/* Animated Big Number */}
@@ -121,31 +127,39 @@ export const LiveQueue: React.FC = () => {
           </div>
 
           <div className="text-sm font-bold text-gray-600">
-            {Math.max(0, position - 1)} {t('farmers_ahead')} in virtual line
+            {Math.max(0, position - 1)} {t('farmers_ahead')} {language === 'mr' ? 'डिजिटल रांगेत' : language === 'hi' ? 'डिजिटल लाइन में' : 'in virtual line'}
           </div>
 
           {/* Wait time progress pill */}
           <div className="my-5 p-4 bg-green-50 rounded-2xl border border-green-200 flex items-center justify-between text-xs sm:text-sm">
             <div className="flex items-center gap-2.5">
               <Clock className="w-5 h-5 text-green-700" />
-              <span className="font-bold text-gray-700">AI-Estimated Waiting Time</span>
+              <span className="font-bold text-gray-700">
+                {language === 'mr' ? 'एआय-अंदाजित प्रतीक्षा वेळ' : language === 'hi' ? 'एआई-अनुमानित प्रतीक्षा समय' : 'AI-Estimated Waiting Time'}
+              </span>
             </div>
-            <span className="font-black text-green-900 text-base sm:text-lg">{waitMinutes} minutes</span>
+            <span className="font-black text-green-900 text-base sm:text-lg">
+              {waitMinutes} {language === 'mr' ? 'मिनिटे' : language === 'hi' ? 'मिनट' : 'minutes'}
+            </span>
           </div>
 
           {/* Visual Queue Stepper: Ahead -> You */}
           <div className="py-2">
-            <div className="text-[10px] uppercase font-bold text-gray-400 mb-3">Live Yard Progression</div>
+            <div className="text-[10px] uppercase font-bold text-gray-400 mb-3">
+              {language === 'mr' ? 'थेट बाजार यार्ड प्रवाह' : language === 'hi' ? 'लाइव मंडी यार्ड प्रवाह' : 'Live Yard Progression'}
+            </div>
             <div className="flex items-center justify-center gap-1.5 sm:gap-2 text-xs font-bold overflow-x-auto py-1">
               <span className="px-2.5 py-1.5 bg-gray-100 rounded-xl text-gray-500">#{position + 2}</span>
               <span className="text-gray-300">➔</span>
               <span className="px-2.5 py-1.5 bg-gray-100 rounded-xl text-gray-500">#{position + 1}</span>
               <span className="text-gray-300">➔</span>
               <span className="px-4 py-2 bg-green-700 text-white rounded-2xl shadow-xs ring-4 ring-green-100 font-black text-sm scale-110">
-                #{position} (You)
+                #{position} ({language === 'mr' ? 'तुम्ही' : language === 'hi' ? 'आप' : 'You'})
               </span>
               <span className="text-gray-300">➔</span>
-              <span className="px-3 py-1.5 bg-amber-100 text-amber-900 rounded-xl font-bold">Counter</span>
+              <span className="px-3 py-1.5 bg-amber-100 text-amber-900 rounded-xl font-bold">
+                {language === 'mr' ? 'काउंटर' : language === 'hi' ? 'काउंटर' : 'Counter'}
+              </span>
             </div>
           </div>
         </div>
@@ -157,10 +171,10 @@ export const LiveQueue: React.FC = () => {
           <div className="bg-white rounded-3xl p-6 border border-gray-200 shadow-soft">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xs uppercase font-extrabold tracking-wider text-gray-600">
-                Operational APMC Counters (4 Active)
+                {language === 'mr' ? 'कार्यरत बाजार समिती काउंटर्स (४ सक्रिय)' : language === 'hi' ? 'कार्यरत मंडी काउंटर्स (4 सक्रिय)' : 'Operational APMC Counters (4 Active)'}
               </h2>
               <span className="text-[10px] text-green-700 font-bold bg-green-50 px-2.5 py-0.5 rounded-full border border-green-200">
-                Gate & Yard Synced
+                {language === 'mr' ? 'गेट व यार्ड सिंक' : language === 'hi' ? 'गेट व यार्ड सिंक' : 'Gate & Yard Synced'}
               </span>
             </div>
 
@@ -171,14 +185,16 @@ export const LiveQueue: React.FC = () => {
                   className="bg-gray-50/80 p-4 rounded-2xl border border-gray-200 flex flex-col justify-between"
                 >
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs sm:text-sm font-black text-green-950">Counter {c.num}</span>
+                    <span className="text-xs sm:text-sm font-black text-green-950">
+                      {language === 'mr' ? 'काउंटर' : language === 'hi' ? 'काउंटर' : 'Counter'} {c.num}
+                    </span>
                     <span className={`text-[10px] font-extrabold px-2 py-0.5 rounded-md ${c.badge}`}>
-                      {c.status}
+                      {language === 'mr' ? 'सक्रिय' : language === 'hi' ? 'सक्रिय' : c.status}
                     </span>
                   </div>
                   <div className="text-xs font-bold text-gray-700">{c.stage}</div>
                   <div className="text-[11px] text-gray-500 mt-2 font-mono">
-                    Serving: <span className="font-bold text-gray-800">{c.serving}</span>
+                    {language === 'mr' ? 'सुरू टोकन:' : language === 'hi' ? 'जारी टोकन:' : 'Serving:'} <span className="font-bold text-gray-800">{c.serving}</span>
                   </div>
                 </div>
               ))}
@@ -190,7 +206,7 @@ export const LiveQueue: React.FC = () => {
             onClick={() => navigate('/weighing')}
             className="w-full py-4 rounded-2xl bg-green-700 hover:bg-green-800 text-white font-extrabold text-sm sm:text-base shadow-soft-lg flex items-center justify-center gap-2 active:scale-98 transition"
           >
-            <span>Proceed to Weighing Stage</span>
+            <span>{language === 'mr' ? 'वजन काटा टप्प्यावर जा' : language === 'hi' ? 'तौल कांटा चरण पर जाएं' : 'Proceed to Weighing Stage'}</span>
             <ArrowRight className="w-5 h-5 stroke-[3]" />
           </button>
 

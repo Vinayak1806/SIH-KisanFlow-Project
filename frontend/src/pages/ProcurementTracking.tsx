@@ -14,6 +14,7 @@ export const ProcurementTracking: React.FC = () => {
     {
       title: "1. Farmer Registration & Slot",
       title_mr: "१. शेतकरी नोंदणी व स्लॉट आरक्षण",
+      title_hi: "१. किसान पंजीकरण एवं स्लॉट बुकिंग",
       time: "Today, 09:15 AM",
       status: "completed",
       officer: "Automated Digital Gateway",
@@ -23,6 +24,7 @@ export const ProcurementTracking: React.FC = () => {
     {
       title: "2. Document Verification",
       title_mr: "२. कागदपत्र व ७/१२ पडताळणी",
+      title_hi: "२. दस्तावेज व भूमि रिकॉर्ड सत्यापन",
       time: "Today, 10:20 AM",
       status: "completed",
       officer: "Anand Kulkarni (Verification Officer)",
@@ -32,6 +34,7 @@ export const ProcurementTracking: React.FC = () => {
     {
       title: "3. Electronic Weighbridge",
       title_mr: "३. इलेक्ट्रॉनिक वजन काटा",
+      title_hi: "३. इलेक्ट्रॉनिक धर्मकांटा तौल",
       time: "Now in Progress (10:35 AM)",
       status: "in_progress",
       officer: "Nitin Jadhav (Weighbridge Incharge)",
@@ -41,6 +44,7 @@ export const ProcurementTracking: React.FC = () => {
     {
       title: "4. Quality Check & Procurement",
       title_mr: "४. गुणवत्ता तपासणी व शेतमाल खरेदी",
+      title_hi: "४. गुणवत्ता परीक्षण एवं उपज खरीद",
       time: "Upcoming",
       status: "pending",
       officer: "Sanjay Deshmukh (Procurement Officer)",
@@ -50,6 +54,7 @@ export const ProcurementTracking: React.FC = () => {
     {
       title: "5. Digital Receipt Generation",
       title_mr: "५. डिजिटल खरेदी पावती",
+      title_hi: "५. डिजिटल खरीद रसीद जारी",
       time: "Upcoming",
       status: "pending",
       officer: "KisanFlow Automated Engine",
@@ -59,6 +64,7 @@ export const ProcurementTracking: React.FC = () => {
     {
       title: "6. Direct Benefit Transfer (DBT)",
       title_mr: "६. थेट बँक खात्यात रक्कम जमा (DBT)",
+      title_hi: "६. सीधा बैंक खाता भुगतान (DBT)",
       time: "Upcoming",
       status: "pending",
       officer: "PFMS / Treasury Integration",
@@ -72,10 +78,14 @@ export const ProcurementTracking: React.FC = () => {
       
       <div className="mb-6">
         <h1 className="text-2xl sm:text-3xl font-extrabold text-green-950">
-          {language === 'mr' ? 'खरेदी प्रक्रिया ट्रॅकिंग' : 'Procurement Journey Tracking'}
+          {language === 'mr' ? 'खरेदी प्रक्रिया ट्रॅकिंग' : language === 'hi' ? 'खरीद प्रक्रिया ट्रैकिंग' : 'Procurement Journey Tracking'}
         </h1>
         <p className="text-xs sm:text-sm text-gray-500 mt-1">
-          Step-by-step transparent audit trail for Token KF-2026-000123
+          {language === 'mr' 
+            ? 'टोकन KF-2026-000123 साठी टप्प्याटप्प्याने पारदर्शक ऑडिट ट्रेल' 
+            : language === 'hi' 
+            ? 'टोकन KF-2026-000123 के लिए चरणबद्ध पारदर्शी ऑडिट ट्रेल' 
+            : 'Step-by-step transparent audit trail for Token KF-2026-000123'}
         </p>
       </div>
 
@@ -85,7 +95,7 @@ export const ProcurementTracking: React.FC = () => {
         <div className="lg:col-span-5 space-y-4">
           <div className="bg-white rounded-3xl p-6 border-2 border-green-700/60 shadow-token">
             <span className="text-[10px] font-black uppercase tracking-wider text-green-800 bg-green-100 px-2.5 py-1 rounded-full border border-green-200">
-              Active Procurement Token
+              {language === 'mr' ? 'सक्रिय खरेदी टोकन' : language === 'hi' ? 'सक्रिय खरीद टोकन' : 'Active Procurement Token'}
             </span>
             <div className="text-2xl font-black font-mono text-green-950 mt-3">
               KF-2026-000123
@@ -93,20 +103,20 @@ export const ProcurementTracking: React.FC = () => {
             
             <div className="mt-4 pt-4 border-t border-gray-100 text-xs sm:text-sm space-y-2">
               <div className="flex justify-between py-0.5">
-                <span className="text-gray-500">Farmer:</span>
-                <span className="font-bold text-gray-900">Rajesh Baburao Pawar</span>
+                <span className="text-gray-500">{language === 'mr' ? 'शेतकरी' : language === 'hi' ? 'किसान' : 'Farmer'}:</span>
+                <span className="font-bold text-gray-900">{language === 'mr' ? 'राजेश बाबुराव पवार' : language === 'hi' ? 'राजेश बाबूराव पवार' : 'Rajesh Baburao Pawar'}</span>
               </div>
               <div className="flex justify-between py-0.5">
-                <span className="text-gray-500">Crop:</span>
-                <span className="font-bold text-gray-900">Wheat (35.0 Q)</span>
+                <span className="text-gray-500">{language === 'mr' ? 'पीक' : language === 'hi' ? 'फसल' : 'Crop'}:</span>
+                <span className="font-bold text-gray-900">{language === 'mr' ? 'गहू' : language === 'hi' ? 'गेहूं' : 'Wheat'} (35.0 Q)</span>
               </div>
               <div className="flex justify-between py-0.5">
-                <span className="text-gray-500">Center:</span>
+                <span className="text-gray-500">{language === 'mr' ? 'खरेदी केंद्र' : language === 'hi' ? 'खरीद केंद्र' : 'Center'}:</span>
                 <span className="font-bold text-gray-900 truncate max-w-[180px]">Pune APMC Mandi</span>
               </div>
               <div className="flex justify-between py-0.5">
-                <span className="text-gray-500">Current Stage:</span>
-                <span className="font-black text-amber-700">● 4. Weighbridge Measurement</span>
+                <span className="text-gray-500">{language === 'mr' ? 'सध्याचा टप्पा' : language === 'hi' ? 'वर्तमान चरण' : 'Current Stage'}:</span>
+                <span className="font-black text-amber-700">● {language === 'mr' ? '३. वजन काटा मोजणी' : language === 'hi' ? '३. धर्मकांटा तौल' : '3. Weighbridge Measurement'}</span>
               </div>
             </div>
           </div>
@@ -115,7 +125,7 @@ export const ProcurementTracking: React.FC = () => {
             onClick={() => navigate('/weighing')}
             className="w-full py-4 rounded-2xl bg-green-700 hover:bg-green-800 text-white font-extrabold text-sm shadow-soft-lg flex items-center justify-center gap-2 active:scale-98 transition"
           >
-            <span>Open Weighbridge Scale Screen</span>
+            <span>{language === 'mr' ? 'वजन काटा स्क्रीन उघडा' : language === 'hi' ? 'तौल कांटा स्क्रीन खोलें' : 'Open Weighbridge Scale Screen'}</span>
             <ArrowRight className="w-4 h-4 stroke-[3]" />
           </button>
         </div>
@@ -123,7 +133,7 @@ export const ProcurementTracking: React.FC = () => {
         {/* Right Column: Stepper Timeline */}
         <div className="lg:col-span-7 bg-white rounded-3xl p-6 border border-gray-200 shadow-soft">
           <h2 className="text-xs uppercase font-extrabold tracking-wider text-gray-500 mb-5 px-1">
-            Audit Trail Progression
+            {language === 'mr' ? 'प्रक्रिया प्रगती तपशील' : language === 'hi' ? 'प्रक्रिया प्रगति विवरण' : 'Audit Trail Progression'}
           </h2>
 
           <div className="space-y-6 relative before:absolute before:inset-0 before:left-4 before:h-full before:w-0.5 before:bg-gray-200">
@@ -152,7 +162,7 @@ export const ProcurementTracking: React.FC = () => {
                   <div className="flex-1">
                     <div className="flex items-center justify-between">
                       <h3 className={`text-xs sm:text-sm font-extrabold ${isCurrent ? 'text-amber-800' : 'text-gray-900'}`}>
-                        {language === 'mr' ? st.title_mr : st.title}
+                        {language === 'mr' ? st.title_mr : language === 'hi' ? st.title_hi : st.title}
                       </h3>
                       <span
                         className={`text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider ${
@@ -163,7 +173,11 @@ export const ProcurementTracking: React.FC = () => {
                             : 'bg-gray-100 text-gray-500'
                         }`}
                       >
-                        {isCompleted ? 'Done ✓' : isCurrent ? 'Active ●' : 'Pending'}
+                        {isCompleted 
+                          ? (language === 'mr' ? 'पूर्ण ✓' : language === 'hi' ? 'पूर्ण ✓' : 'Done ✓') 
+                          : isCurrent 
+                          ? (language === 'mr' ? 'सक्रिय ●' : language === 'hi' ? 'सक्रिय ●' : 'Active ●') 
+                          : (language === 'mr' ? 'प्रलंबित' : language === 'hi' ? 'लंबित' : 'Pending')}
                       </span>
                     </div>
 
@@ -172,7 +186,7 @@ export const ProcurementTracking: React.FC = () => {
                     </p>
 
                     <div className="text-[10px] text-gray-400 mt-1.5 flex items-center justify-between">
-                      <span>Officer: {st.officer}</span>
+                      <span>{language === 'mr' ? 'अधिकारी' : language === 'hi' ? 'अधिकारी' : 'Officer'}: {st.officer}</span>
                       <span>{st.time}</span>
                     </div>
                   </div>

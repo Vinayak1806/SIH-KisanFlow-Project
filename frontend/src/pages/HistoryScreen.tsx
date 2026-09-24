@@ -5,38 +5,51 @@ import { useLanguage } from '../context/LanguageContext';
 export const HistoryScreen: React.FC = () => {
   const { t, language } = useLanguage();
 
+  const getCropName = (cropKey: string) => {
+    switch (cropKey) {
+      case 'wheat':
+        return language === 'mr' ? 'गहू (Wheat)' : language === 'hi' ? 'गेहूं (Wheat)' : 'Wheat (गहू)';
+      case 'cotton':
+        return language === 'mr' ? 'कापूस (Cotton)' : language === 'hi' ? 'कपास (Cotton)' : 'Cotton (कापूस)';
+      case 'soybean':
+        return language === 'mr' ? 'सोयाबीन (Soybean)' : language === 'hi' ? 'सोयाबीन (Soybean)' : 'Soybean (सोयाबीन)';
+      default:
+        return cropKey;
+    }
+  };
+
   const history = [
     {
       id: "RCPT-2026-00123",
-      crop: "Wheat (गहू)",
-      quantity: "34.6 Quintals",
-      date: "24 Sep 2026",
-      center: "Pune Agriculture Procurement Center (APMC)",
+      cropKey: "wheat",
+      quantity: language === 'mr' ? "३४.६ क्विंटल" : language === 'hi' ? "३४.६ क्विंटल" : "34.6 Quintals",
+      date: language === 'mr' ? "२४ सप्टेंबर २०२६" : language === 'hi' ? "२४ सितंबर २०२६" : "24 Sep 2026",
+      center: language === 'mr' ? "पुणे कृषी खरेदी केंद्र (APMC)" : language === 'hi' ? "पुणे कृषि खरीद केंद्र (APMC)" : "Pune Agriculture Procurement Center (APMC)",
       amount: "₹83,905",
-      rate: "₹2,425 / Q",
-      status: "Paid ✓",
+      rate: language === 'mr' ? "₹२,४२५ / क्विंटल" : language === 'hi' ? "₹२,४२५ / क्विंटल" : "₹2,425 / Q",
+      status: language === 'mr' ? "जमा झाले ✓" : language === 'hi' ? "भुगतान सफल ✓" : "Paid ✓",
       badge: "bg-emerald-100 text-emerald-800"
     },
     {
       id: "RCPT-2026-00089",
-      crop: "Cotton (कापूस)",
-      quantity: "22.0 Quintals",
-      date: "12 May 2026",
-      center: "Baramati Kisan Sahakari Yard",
+      cropKey: "cotton",
+      quantity: language === 'mr' ? "२२.० क्विंटल" : language === 'hi' ? "२२.० क्विंटल" : "22.0 Quintals",
+      date: language === 'mr' ? "१२ मे २०२६" : language === 'hi' ? "१२ मई २०२६" : "12 May 2026",
+      center: language === 'mr' ? "बारामती किसान सहकारी यार्ड" : language === 'hi' ? "बारामती किसान सहकारी यार्ड" : "Baramati Kisan Sahakari Yard",
       amount: "₹1,56,200",
-      rate: "₹7,100 / Q",
-      status: "Paid ✓",
+      rate: language === 'mr' ? "₹७,१०० / क्विंटल" : language === 'hi' ? "₹७,१०० / क्विंटल" : "₹7,100 / Q",
+      status: language === 'mr' ? "जमा झाले ✓" : language === 'hi' ? "भुगतान सफल ✓" : "Paid ✓",
       badge: "bg-emerald-100 text-emerald-800"
     },
     {
       id: "RCPT-2025-01420",
-      crop: "Soybean (सोयाबीन)",
-      quantity: "28.5 Quintals",
-      date: "18 Nov 2025",
-      center: "Pune APMC Market Yard",
+      cropKey: "soybean",
+      quantity: language === 'mr' ? "२८.५ क्विंटल" : language === 'hi' ? "२८.५ क्विंटल" : "28.5 Quintals",
+      date: language === 'mr' ? "१८ नोव्हेंबर २०२५" : language === 'hi' ? "१८ नवंबर २०२५" : "18 Nov 2025",
+      center: language === 'mr' ? "पुणे APMC मार्केट यार्ड" : language === 'hi' ? "पुणे APMC मार्केट यार्ड" : "Pune APMC Market Yard",
       amount: "₹1,39,422",
-      rate: "₹4,892 / Q",
-      status: "Paid ✓",
+      rate: language === 'mr' ? "₹४,८९२ / क्विंटल" : language === 'hi' ? "₹४,८९२ / क्विंटल" : "₹4,892 / Q",
+      status: language === 'mr' ? "जमा झाले ✓" : language === 'hi' ? "भुगतान सफल ✓" : "Paid ✓",
       badge: "bg-emerald-100 text-emerald-800"
     },
   ];
@@ -51,12 +64,20 @@ export const HistoryScreen: React.FC = () => {
             <span>{t('history')}</span>
           </h1>
           <p className="text-xs sm:text-sm text-gray-500 mt-1">
-            Archived government procurement receipts & DBT payouts
+            {language === 'mr'
+              ? 'संग्रहित सरकारी खरेदी पावत्या व DBT थेट बँक देयके'
+              : language === 'hi'
+              ? 'संग्रहीत सरकारी खरीद रसीदें और डीबीटी बैंक भुगतान'
+              : 'Archived government procurement receipts & DBT payouts'}
           </p>
         </div>
         <div className="flex items-center gap-2">
           <span className="text-xs font-bold bg-green-100 text-green-800 px-3 py-1 rounded-full border border-green-200">
-            3 Completed Transactions
+            {language === 'mr'
+              ? '३ पूर्ण झालेले व्यवहार'
+              : language === 'hi'
+              ? '३ पूर्ण लेनदेन'
+              : '3 Completed Transactions'}
           </span>
         </div>
       </div>
@@ -70,7 +91,7 @@ export const HistoryScreen: React.FC = () => {
             <div>
               <div className="flex items-start justify-between mb-3">
                 <div>
-                  <h3 className="text-base font-extrabold text-gray-900">{item.crop}</h3>
+                  <h3 className="text-base font-extrabold text-gray-900">{getCropName(item.cropKey)}</h3>
                   <span className="text-[10px] text-gray-400 font-mono">{item.id}</span>
                 </div>
                 <span className={`text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider ${item.badge}`}>
@@ -80,19 +101,27 @@ export const HistoryScreen: React.FC = () => {
 
               <div className="grid grid-cols-2 gap-2 text-xs py-3 border-y border-gray-100 my-3">
                 <div>
-                  <span className="text-gray-400 text-[10px] block">Quantity:</span>
+                  <span className="text-gray-400 text-[10px] block">
+                    {language === 'mr' ? 'वजन / परिमाण:' : language === 'hi' ? 'वजन / मात्रा:' : 'Quantity:'}
+                  </span>
                   <span className="font-bold text-gray-800">{item.quantity}</span>
                 </div>
                 <div>
-                  <span className="text-gray-400 text-[10px] block">Procurement Rate:</span>
+                  <span className="text-gray-400 text-[10px] block">
+                    {language === 'mr' ? 'खरेदी दर:' : language === 'hi' ? 'खरीद दर:' : 'Procurement Rate:'}
+                  </span>
                   <span className="font-bold text-gray-800">{item.rate}</span>
                 </div>
                 <div>
-                  <span className="text-gray-400 text-[10px] block">Date:</span>
+                  <span className="text-gray-400 text-[10px] block">
+                    {language === 'mr' ? 'तारीख:' : language === 'hi' ? 'दिनांक:' : 'Date:'}
+                  </span>
                   <span className="font-semibold text-gray-700">{item.date}</span>
                 </div>
                 <div>
-                  <span className="text-gray-400 text-[10px] block">Total Amount:</span>
+                  <span className="text-gray-400 text-[10px] block">
+                    {language === 'mr' ? 'एकूण रक्कम:' : language === 'hi' ? 'कुल राशि:' : 'Total Amount:'}
+                  </span>
                   <span className="font-black text-green-900 text-sm">{item.amount}</span>
                 </div>
               </div>
@@ -107,7 +136,13 @@ export const HistoryScreen: React.FC = () => {
               className="w-full py-2.5 bg-gray-50 hover:bg-green-50 text-green-800 font-bold text-xs rounded-xl border border-gray-200 flex items-center justify-center gap-1.5 transition active:scale-95"
             >
               <Download className="w-3.5 h-3.5" />
-              <span>Download Digital Receipt (PDF)</span>
+              <span>
+                {language === 'mr'
+                  ? 'डिजिटल पावती डाउनलोड करा (PDF)'
+                  : language === 'hi'
+                  ? 'डिजिटल रसीद डाउनलोड करें (PDF)'
+                  : 'Download Digital Receipt (PDF)'}
+              </span>
             </button>
           </div>
         ))}

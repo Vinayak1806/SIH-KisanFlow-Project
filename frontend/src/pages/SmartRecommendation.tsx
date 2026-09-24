@@ -41,7 +41,11 @@ export const SmartRecommendation: React.FC = () => {
             {t('best_option_heading')}
           </h1>
           <p className="text-xs sm:text-sm text-gray-500 mt-1">
-            {language === 'mr' ? 'कमी गर्दी व जलद विक्रीसाठी किसानफ्लो अल्गोरिदमने निवडलेले केंद्र' : 'Multi-factor transparent evaluation prioritizing low wait times and proximity'}
+            {language === 'mr' 
+              ? 'कमी गर्दी व जलद विक्रीसाठी किसानफ्लो अल्गोरिदमने निवडलेले केंद्र' 
+              : language === 'hi' 
+              ? 'न्यूनतम भीड़ और त्वरित बिक्री के लिए किसानफ्लो एआई द्वारा चयनित केंद्र' 
+              : 'Multi-factor transparent evaluation prioritizing low wait times and proximity'}
           </p>
         </div>
 
@@ -49,7 +53,7 @@ export const SmartRecommendation: React.FC = () => {
           onClick={() => navigate('/centers')}
           className="px-4 py-2.5 rounded-2xl bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-bold shrink-0 self-start sm:self-center"
         >
-          ← Browse All Centers
+          {language === 'mr' ? '← सर्व केंद्रे पहा' : language === 'hi' ? '← सभी केंद्र देखें' : '← Browse All Centers'}
         </button>
       </div>
 
@@ -62,7 +66,9 @@ export const SmartRecommendation: React.FC = () => {
             <div className="flex items-center justify-between mb-4">
               <span className="flex items-center gap-1.5 text-xs font-black text-white bg-green-700 px-3.5 py-1.5 rounded-full uppercase tracking-wider">
                 <Star className="w-3.5 h-3.5 fill-white" />
-                <span>Top Recommendation • Score {rec.score}/100</span>
+                <span>
+                  {language === 'mr' ? 'सर्वोत्तम शिफारस' : language === 'hi' ? 'सर्वश्रेष्ठ सिफारिश' : 'Top Recommendation'} • {rec.score}/100
+                </span>
               </span>
               <span className="text-xs font-black text-green-800 bg-green-50 px-3 py-1 rounded-full border border-green-200">
                 🟢 {t('low_wait')}
@@ -74,21 +80,33 @@ export const SmartRecommendation: React.FC = () => {
             </h2>
             <div className="text-xs sm:text-sm text-gray-500 flex items-center gap-1.5 mt-1.5">
               <MapPin className="w-4 h-4 text-green-700 shrink-0" />
-              <span>{rec.distance_km} km away from your village (Shivane, Haveli)</span>
+              <span>
+                {rec.distance_km} {language === 'mr' ? 'किमी अंतर (शिवणे, हवेली)' : language === 'hi' ? 'किमी दूर आपके गांव से (शिवणे, हवेली)' : 'km away from your village (Shivane, Haveli)'}
+              </span>
             </div>
 
             {/* Quick Metrics Bar */}
             <div className="grid grid-cols-3 gap-3 my-5 p-4 bg-green-50/70 rounded-2xl text-center border border-green-100">
               <div>
-                <div className="text-[10px] sm:text-xs text-green-800 font-bold uppercase">Estimated Wait</div>
-                <div className="text-xl sm:text-2xl font-black text-green-900">{Math.round(rec.estimated_wait)} min</div>
+                <div className="text-[10px] sm:text-xs text-green-800 font-bold uppercase">
+                  {language === 'mr' ? 'अंदाजे वेळ' : language === 'hi' ? 'अनुमानित समय' : 'Estimated Wait'}
+                </div>
+                <div className="text-xl sm:text-2xl font-black text-green-900">
+                  {Math.round(rec.estimated_wait)} {language === 'mr' ? 'मि.' : language === 'hi' ? 'मि.' : 'min'}
+                </div>
               </div>
               <div>
-                <div className="text-[10px] sm:text-xs text-green-800 font-bold uppercase">Current Queue</div>
-                <div className="text-xl sm:text-2xl font-black text-green-900">{rec.queue_length} farmers</div>
+                <div className="text-[10px] sm:text-xs text-green-800 font-bold uppercase">
+                  {language === 'mr' ? 'रांगेतील शेतकरी' : language === 'hi' ? 'कतार में किसान' : 'Current Queue'}
+                </div>
+                <div className="text-xl sm:text-2xl font-black text-green-900">
+                  {rec.queue_length} {language === 'mr' ? 'शेतकरी' : language === 'hi' ? 'किसान' : 'farmers'}
+                </div>
               </div>
               <div>
-                <div className="text-[10px] sm:text-xs text-green-800 font-bold uppercase">MSP Price</div>
+                <div className="text-[10px] sm:text-xs text-green-800 font-bold uppercase">
+                  {language === 'mr' ? 'हमीभाव' : language === 'hi' ? 'समर्थन मूल्य' : 'MSP Price'}
+                </div>
                 <div className="text-xl sm:text-2xl font-black text-green-900">₹{Math.round(rec.price).toLocaleString()}</div>
               </div>
             </div>

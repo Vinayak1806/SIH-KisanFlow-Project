@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Sparkles, X } from 'lucide-react';
+import { Sparkles, X, ChevronRight } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 export const DemoFlowBar: React.FC = () => {
@@ -26,23 +26,23 @@ export const DemoFlowBar: React.FC = () => {
     return (
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-4 right-4 z-50 bg-slate-900/90 hover:bg-slate-900 text-white px-3.5 py-2 rounded-full shadow-2xl border border-slate-700/80 text-xs font-bold flex items-center gap-2 backdrop-blur-md transition-all active:scale-95 group hover:ring-4 hover:ring-amber-500/20"
+        className="fixed bottom-5 right-5 z-50 bg-gradient-to-r from-green-800 via-emerald-800 to-green-900 hover:from-green-700 hover:to-emerald-700 text-white px-4 py-2.5 rounded-full shadow-2xl border border-emerald-500/40 text-xs font-bold flex items-center gap-2.5 backdrop-blur-md transition-all active:scale-95 group hover:ring-4 hover:ring-emerald-500/20"
         title="Open Evaluator Presentation Shortcuts"
       >
-        <span className="flex h-2 w-2 rounded-full bg-amber-400 animate-ping" />
-        <Sparkles className="w-3.5 h-3.5 text-amber-400 group-hover:rotate-12 transition-transform" />
-        <span className="text-[11px] tracking-wide">Presentation Shortcuts</span>
+        <span className="flex h-2.5 w-2.5 rounded-full bg-amber-400 animate-ping" />
+        <Sparkles className="w-4 h-4 text-amber-300 group-hover:rotate-12 transition-transform" />
+        <span className="text-xs tracking-wide font-extrabold text-amber-100">Presentation Shortcuts</span>
       </button>
     );
   }
 
   return (
-    <div className="sticky top-16 left-0 right-0 z-30 bg-slate-900 text-white border-b border-slate-800 shadow-xl animate-in slide-in-from-top-2 duration-200">
+    <div className="sticky top-16 left-0 right-0 z-30 bg-gradient-to-r from-[#143320] via-[#1B432B] to-[#122E1D] text-white border-b border-emerald-600/40 shadow-lg backdrop-blur-md animate-in slide-in-from-top-2 duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between text-xs gap-3">
         
         {/* Title */}
-        <div className="flex items-center gap-2 font-black text-amber-400 shrink-0">
-          <Sparkles className="w-4 h-4 text-amber-400" />
+        <div className="flex items-center gap-2 font-black text-amber-300 shrink-0">
+          <Sparkles className="w-4 h-4 text-amber-300" />
           <span className="text-[11px] uppercase tracking-wider font-extrabold hidden sm:inline">
             Evaluator Presentation Shortcuts
           </span>
@@ -53,13 +53,13 @@ export const DemoFlowBar: React.FC = () => {
 
         {/* Persona Buttons & Step Shortcuts */}
         <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
-          <div className="flex items-center gap-1.5 shrink-0 bg-slate-800/90 p-1 rounded-xl border border-slate-700">
+          <div className="flex items-center gap-1.5 shrink-0 bg-black/25 p-1 rounded-xl border border-emerald-500/30">
             <button
               onClick={() => {
                 quickDemoLogin('farmer');
                 navigate('/dashboard');
               }}
-              className="px-2.5 py-1 bg-green-700 hover:bg-green-800 text-white rounded-lg text-[11px] font-bold shadow-xs whitespace-nowrap active:scale-95 transition"
+              className="px-2.5 py-1 bg-green-600 hover:bg-green-500 text-white rounded-lg text-[11px] font-bold shadow-xs whitespace-nowrap active:scale-95 transition"
             >
               👨‍🌾 Farmer
             </button>
@@ -68,7 +68,7 @@ export const DemoFlowBar: React.FC = () => {
                 quickDemoLogin('officer');
                 navigate('/officer');
               }}
-              className="px-2.5 py-1 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-[11px] font-bold shadow-xs whitespace-nowrap active:scale-95 transition"
+              className="px-2.5 py-1 bg-amber-500 hover:bg-amber-400 text-amber-950 rounded-lg text-[11px] font-black shadow-xs whitespace-nowrap active:scale-95 transition"
             >
               👮 Officer
             </button>
@@ -77,24 +77,24 @@ export const DemoFlowBar: React.FC = () => {
                 quickDemoLogin('admin');
                 navigate('/admin');
               }}
-              className="px-2.5 py-1 bg-blue-700 hover:bg-blue-800 text-white rounded-lg text-[11px] font-bold shadow-xs whitespace-nowrap active:scale-95 transition"
+              className="px-2.5 py-1 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-[11px] font-bold shadow-xs whitespace-nowrap active:scale-95 transition"
             >
               🏛️ Admin
             </button>
           </div>
 
           {/* Quick Step Buttons for Evaluator Ease */}
-          <div className="hidden lg:flex items-center gap-1 border-l border-slate-700 pl-2">
+          <div className="hidden lg:flex items-center gap-1 border-l border-emerald-600/40 pl-2">
             {demoSteps.map((step) => {
               const isCurrent = location.pathname === step.path;
               return (
                 <button
                   key={step.path}
                   onClick={() => navigate(step.path)}
-                  className={`px-2 py-1 rounded-lg text-[10px] font-bold whitespace-nowrap transition ${
+                  className={`px-2.5 py-1 rounded-lg text-[10px] font-bold whitespace-nowrap transition ${
                     isCurrent
-                      ? 'bg-amber-500 text-slate-950 font-black shadow-xs'
-                      : 'bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700'
+                      ? 'bg-amber-400 text-emerald-950 font-black shadow-soft'
+                      : 'bg-emerald-950/60 hover:bg-emerald-800/80 text-emerald-100 border border-emerald-700/50'
                   }`}
                 >
                   {step.label}
@@ -106,7 +106,7 @@ export const DemoFlowBar: React.FC = () => {
           {/* Close button */}
           <button
             onClick={() => setIsOpen(false)}
-            className="p-1 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition shrink-0 ml-1"
+            className="p-1 text-emerald-300 hover:text-white rounded-lg hover:bg-emerald-800/60 transition shrink-0 ml-1"
             title="Minimize Shortcuts"
           >
             <X className="w-4 h-4" />

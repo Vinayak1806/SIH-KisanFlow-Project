@@ -44,13 +44,17 @@ export const WeighingScreen: React.FC = () => {
       {/* Top Header */}
       <div className="text-center mb-6">
         <span className="text-xs font-extrabold uppercase tracking-wider text-green-800 bg-green-100 px-3.5 py-1 rounded-full border border-green-200">
-          Certified Electronic Weighbridge #3
+          {language === 'mr' ? 'प्रमाणित इलेक्ट्रॉनिक वजन काटा #३' : language === 'hi' ? 'प्रमाणित इलेक्ट्रॉनिक तौल कांटा #3' : 'Certified Electronic Weighbridge #3'}
         </span>
         <h1 className="text-2xl sm:text-3xl font-black text-green-950 mt-2">
           {t('weighing_in_progress')}
         </h1>
         <p className="text-xs sm:text-sm text-gray-500 mt-1">
-          Government Metrology Legal Standard Certified • Live Calibration Synced
+          {language === 'mr' 
+            ? 'शासकीय विधी मेट्रॉलॉजी मानक प्रमाणित • थेट कॅलिब्रेशन' 
+            : language === 'hi' 
+            ? 'सरकारी विधिक मापविज्ञान मानक प्रमाणित • लाइव कैलिब्रेशन' 
+            : 'Government Metrology Legal Standard Certified • Live Calibration Synced'}
         </p>
       </div>
 
@@ -62,7 +66,7 @@ export const WeighingScreen: React.FC = () => {
           <div className="flex justify-between items-center text-xs font-mono text-gray-400 mb-3">
             <span>SCALE ID: WB-PUN-03</span>
             <span className={`px-2.5 py-1 rounded-md text-xs font-bold ${isStable ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/50' : 'bg-amber-500/20 text-amber-400 animate-pulse'}`}>
-              {isStable ? 'STABLE ● CERTIFIED' : 'MEASURING...'}
+              {isStable ? (language === 'mr' ? 'स्थिर ● प्रमाणित' : language === 'hi' ? 'स्थिर ● प्रमाणित' : 'STABLE ● CERTIFIED') : (language === 'mr' ? 'मोजणी सुरू...' : language === 'hi' ? 'तौल जारी...' : 'MEASURING...')}
             </span>
           </div>
 
@@ -71,8 +75,8 @@ export const WeighingScreen: React.FC = () => {
             <div className="text-6xl sm:text-7xl font-black text-emerald-400 tracking-tight">
               {liveWeight.toFixed(1)}
             </div>
-            <div className="text-base sm:text-lg font-bold text-gray-300 tracking-widest mt-2">
-              QUINTALS ({Math.round(liveWeight * 100)} KG)
+            <div className="text-base sm:text-lg font-bold text-gray-300 tracking-widest mt-2 uppercase">
+              {language === 'mr' ? 'क्विंटल' : language === 'hi' ? 'क्विंटल' : 'QUINTALS'} ({Math.round(liveWeight * 100)} {language === 'mr' ? 'कि.ग्रा.' : language === 'hi' ? 'कि.ग्रा.' : 'KG'})
             </div>
           </div>
 
@@ -85,7 +89,7 @@ export const WeighingScreen: React.FC = () => {
           </div>
           <div className="flex justify-between text-[11px] font-mono text-gray-500 mt-2">
             <span>0.0 Q</span>
-            <span>Target: {expectedWeight} Q</span>
+            <span>{language === 'mr' ? 'अपेक्षित:' : language === 'hi' ? 'लक्ष्य:' : 'Target:'} {expectedWeight} Q</span>
           </div>
         </div>
 
@@ -93,35 +97,39 @@ export const WeighingScreen: React.FC = () => {
         <div className="md:col-span-5 space-y-5">
           <div className="bg-white rounded-3xl p-6 border border-gray-200 shadow-soft">
             <h2 className="text-xs font-extrabold text-gray-400 uppercase tracking-wider mb-4">
-              Weight Verification Summary
+              {language === 'mr' ? 'वजन पडताळणी सारांश' : language === 'hi' ? 'वजन सत्यापन सारांश' : 'Weight Verification Summary'}
             </h2>
 
             <div className="grid grid-cols-2 gap-3 text-center mb-5">
               <div className="p-3.5 bg-gray-50 rounded-2xl border border-gray-100">
                 <div className="text-[10px] text-gray-500 uppercase font-bold">{t('expected_weight')}</div>
                 <div className="text-xl font-black text-gray-700">{expectedWeight} Q</div>
-                <div className="text-[10px] text-gray-400 mt-0.5">Declared at booking</div>
+                <div className="text-[10px] text-gray-400 mt-0.5">
+                  {language === 'mr' ? 'बुकिंगवेळी नोंदवलेले' : language === 'hi' ? 'बुकिंग के समय घोषित' : 'Declared at booking'}
+                </div>
               </div>
 
               <div className="p-3.5 bg-green-50 rounded-2xl border border-green-200">
                 <div className="text-[10px] text-green-800 uppercase font-bold">{t('actual_weight')}</div>
                 <div className="text-xl font-black text-green-950">{targetWeight} Q</div>
-                <div className="text-[10px] text-green-700 font-bold mt-0.5">Verified on Scale</div>
+                <div className="text-[10px] text-green-700 font-bold mt-0.5">
+                  {language === 'mr' ? 'काट्यावर प्रमाणित' : language === 'hi' ? 'कांटे पर सत्यापित' : 'Verified on Scale'}
+                </div>
               </div>
             </div>
 
             {/* Pricing Calculation Preview */}
             <div className="p-4 bg-emerald-50 rounded-2xl border border-emerald-200 text-xs space-y-1.5 mb-6">
               <div className="flex justify-between">
-                <span className="text-gray-600">Crop / Variety:</span>
-                <span className="font-bold text-gray-900">Wheat (Grade A)</span>
+                <span className="text-gray-600">{language === 'mr' ? 'पीक / वाण' : language === 'hi' ? 'फसल / किस्म' : 'Crop / Variety'}:</span>
+                <span className="font-bold text-gray-900">{language === 'mr' ? 'गहू (ग्रेड अ)' : language === 'hi' ? 'गेहूं (ग्रेड ए)' : 'Wheat (Grade A)'}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">Procurement MSP Rate:</span>
-                <span className="font-bold text-gray-900">₹2,425 / quintal</span>
+                <span className="text-gray-600">{language === 'mr' ? 'शासकीय खरेदी हमीभाव' : language === 'hi' ? 'सरकारी खरीद समर्थन मूल्य' : 'Procurement MSP Rate'}:</span>
+                <span className="font-bold text-gray-900">₹2,425 {language === 'mr' ? '/ क्विंटल' : language === 'hi' ? '/ क्विंटल' : '/ quintal'}</span>
               </div>
               <div className="flex justify-between border-t border-emerald-200 pt-2 font-black text-sm text-green-950">
-                <span>Total Payable Value:</span>
+                <span>{language === 'mr' ? 'एकूण देय रक्कम:' : language === 'hi' ? 'कुल देय राशि:' : 'Total Payable Value:'}</span>
                 <span className="text-base text-green-900">₹83,905</span>
               </div>
             </div>
@@ -131,7 +139,7 @@ export const WeighingScreen: React.FC = () => {
               onClick={handleConfirm}
               className="w-full py-4 rounded-2xl bg-green-700 hover:bg-green-800 text-white font-extrabold text-sm sm:text-base shadow-soft-lg flex items-center justify-center gap-2 active:scale-98 transition"
             >
-              <span>{t('confirm_weight')} (३४.६ Q) ➔</span>
+              <span>{t('confirm_weight')} (34.6 Q) ➔</span>
             </button>
           </div>
         </div>

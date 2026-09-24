@@ -1,11 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Sprout, ArrowRight, ShieldCheck, Clock, TrendingUp, Users, CheckCircle2, ChevronRight } from 'lucide-react';
-import { useLanguage, Language } from '../context/LanguageContext';
+import { useLanguage } from '../context/LanguageContext';
 import { useAuth } from '../context/AuthContext';
 
 export const WelcomeLanding: React.FC = () => {
-  const { language, setLanguage, t } = useLanguage();
+  const { language, t } = useLanguage();
   const { quickDemoLogin } = useAuth();
   const navigate = useNavigate();
 
@@ -27,32 +27,15 @@ export const WelcomeLanding: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#FAF7F0] via-[#F4F9F4] to-[#FAF7F0] pb-24 md:pb-12 text-gray-900">
       
-      {/* Top Language Bar */}
+      {/* Top Bar */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 flex justify-between items-center">
         <div className="flex items-center gap-2">
           <span className="text-xs font-bold text-green-900 bg-green-100 px-3 py-1 rounded-full border border-green-200">
-            🌾 Govt. of Maharashtra • APMC Mandi Portal
+            {language === 'mr' ? '🌾 महाराष्ट्र शासन • कृषी उत्पन्न बाजार समिती' : language === 'hi' ? '🌾 महाराष्ट्र शासन • कृषि उपज मंडी पोर्टल' : '🌾 Govt. of Maharashtra • APMC Mandi Portal'}
           </span>
           <span className="hidden sm:inline-block text-xs font-semibold text-gray-500">
-            Smart Virtual Queue & Agricultural Procurement Platform
+            {language === 'mr' ? 'स्मार्ट शेतकरी डिजिटल खरेदी व रांग प्रणाली' : language === 'hi' ? 'स्मार्ट फसल खरीद एवं डिजिटल कतार प्रणाली' : 'Smart Virtual Queue & Agricultural Procurement Platform'}
           </span>
-        </div>
-        
-        {/* Quick Language Toggle */}
-        <div className="flex bg-white/90 backdrop-blur-md rounded-2xl p-1 border border-green-200 shadow-xs">
-          {(['mr', 'hi', 'en'] as Language[]).map((lang) => (
-            <button
-              key={lang}
-              onClick={() => setLanguage(lang)}
-              className={`px-3 py-1 rounded-xl text-xs font-bold transition-all ${
-                language === lang
-                  ? 'bg-green-700 text-white shadow-xs'
-                  : 'text-gray-600 hover:text-green-800'
-              }`}
-            >
-              {lang === 'mr' ? 'मराठी' : lang === 'hi' ? 'हिंदी' : 'EN'}
-            </button>
-          ))}
         </div>
       </div>
 
@@ -84,7 +67,7 @@ export const WelcomeLanding: React.FC = () => {
               <div className="absolute -right-8 -bottom-8 w-36 h-36 bg-green-50 rounded-full pointer-events-none" />
               
               <span className="inline-block text-[11px] font-extrabold text-green-800 bg-green-50 border border-green-200 px-3 py-0.5 rounded-full uppercase tracking-wider mb-2">
-                Digital Public Infrastructure • Smart Automation
+                {language === 'mr' ? 'डिजिटल पब्लिक इन्फ्रास्ट्रक्चर • स्मार्ट ऑटोमेशन' : language === 'hi' ? 'डिजिटल पब्लिक इन्फ्रास्ट्रक्चर • स्मार्ट ऑटोमेशन' : 'Digital Public Infrastructure • Smart Automation'}
               </span>
 
               <h2 className="text-xl sm:text-2xl font-extrabold text-gray-900 leading-snug">
@@ -123,7 +106,7 @@ export const WelcomeLanding: React.FC = () => {
             {/* 4 Pillars of KisanFlow */}
             <div className="w-full mt-8">
               <h3 className="text-xs uppercase font-extrabold tracking-wider text-gray-500 mb-3 px-1 text-left">
-                {language === 'mr' ? 'किसानफ्लोचे फायदे' : language === 'hi' ? 'किसानफ्लो के प्रमुख लाभ' : 'Why KisanFlow?'}
+                {t('why_kisanflow')}
               </h3>
 
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-left">
@@ -132,10 +115,10 @@ export const WelcomeLanding: React.FC = () => {
                     <Clock className="w-4 h-4 stroke-[2.2]" />
                   </div>
                   <div className="text-xs font-bold text-gray-900">
-                    {language === 'mr' ? 'वेळेची बचत' : language === 'hi' ? 'समय की बचत' : 'Less Waiting'}
+                    {t('time_saving')}
                   </div>
                   <div className="text-[10px] text-gray-500 mt-0.5">
-                    {language === 'mr' ? 'थेट डिजिटल रांग व टोकन' : language === 'hi' ? 'डिजिटल टोकन व कतार' : 'Virtual queue & AI wait time'}
+                    {t('time_saving_desc')}
                   </div>
                 </div>
 
@@ -144,10 +127,10 @@ export const WelcomeLanding: React.FC = () => {
                     <TrendingUp className="w-4 h-4 stroke-[2.2]" />
                   </div>
                   <div className="text-xs font-bold text-gray-900">
-                    {language === 'mr' ? 'योग्य हमीभाव' : language === 'hi' ? 'उचित हमीभाव' : 'Live MSP Rates'}
+                    {t('fair_msp')}
                   </div>
                   <div className="text-[10px] text-gray-500 mt-0.5">
-                    {language === 'mr' ? '१००% शासकीय दर खात्री' : language === 'hi' ? 'पारदर्शी सरकारी भाव' : 'Guaranteed MSP rates'}
+                    {t('fair_msp_desc')}
                   </div>
                 </div>
 
@@ -156,10 +139,10 @@ export const WelcomeLanding: React.FC = () => {
                     <ShieldCheck className="w-4 h-4 stroke-[2.2]" />
                   </div>
                   <div className="text-xs font-bold text-gray-900">
-                    {language === 'mr' ? 'पारदर्शक खरेदी' : language === 'hi' ? 'पारदर्शी प्रक्रिया' : 'Transparent Weighing'}
+                    {t('transparent_proc')}
                   </div>
                   <div className="text-[10px] text-gray-500 mt-0.5">
-                    {language === 'mr' ? 'डिजिटल पावती व ऑडिट' : language === 'hi' ? 'डिजिटल रसीद और ट्रैकिंग' : 'Instant digital receipt'}
+                    {t('transparent_proc_desc')}
                   </div>
                 </div>
 
@@ -167,23 +150,23 @@ export const WelcomeLanding: React.FC = () => {
                   <Users className="w-4 h-4 stroke-[2.2]" />
                 </div>
                 <div className="text-xs font-bold text-gray-900">
-                  {language === 'mr' ? 'थेट बँक जमा' : language === 'hi' ? 'सीधा बैंक भुगतान' : 'Fast DBT Payment'}
+                  {t('fast_dbt')}
                 </div>
                 <div className="text-[10px] text-gray-500 mt-0.5">
-                  {language === 'mr' ? 'आधार संलग्न खात्यात थेट' : language === 'hi' ? 'खाते में त्वरित डीबीटी' : 'Direct benefit transfer'}
+                  {t('fast_dbt_desc')}
                 </div>
               </div>
             </div>
 
           </div>
 
-          {/* Right Column: 3 User Roles Cards for Evaluator Ease */}
+          {/* Right Column: 3 User Roles Cards */}
           <div className="lg:col-span-5 w-full space-y-4">
             
             <div className="bg-white p-6 rounded-3xl border border-green-200/90 shadow-soft text-left">
               <div className="flex items-center justify-between mb-3">
                 <div className="text-xs font-extrabold text-green-950 uppercase tracking-wider">
-                  🎯 Experience All 3 Roles
+                  {language === 'mr' ? '🎯 सर्व ३ भूमिकांचा अनुभव घ्या' : language === 'hi' ? '🎯 सभी 3 भूमिकाओं का अनुभव लें' : '🎯 Experience All 3 Roles'}
                 </div>
                 <span className="text-[10px] font-bold bg-amber-100 text-amber-900 px-2 py-0.5 rounded-full">
                   1-Click Switch
@@ -191,7 +174,7 @@ export const WelcomeLanding: React.FC = () => {
               </div>
 
               <p className="text-xs text-gray-500 mb-4">
-                Test the complete flow from farmer booking to weighbridge officer verification and government analytics:
+                {language === 'mr' ? 'शेतकरी बुकिंगपासून ते अधिकारी वजन पडताळणी आणि शासकीय डॅशबोर्डपर्यंत थेट प्रवाह तपासा:' : language === 'hi' ? 'किसान बुकिंग से लेकर तौल सत्यापन और सरकारी डैशबोर्ड तक संपूर्ण प्रवाह देखें:' : 'Test the complete flow from farmer booking to weighbridge officer verification and government analytics:'}
               </p>
 
               <div className="space-y-3">
@@ -202,8 +185,12 @@ export const WelcomeLanding: React.FC = () => {
                   <div className="flex items-center gap-3">
                     <span className="text-2xl">👨‍🌾</span>
                     <div>
-                      <div className="text-sm font-extrabold text-green-950 group-hover:text-green-900">Farmer Dashboard (PWA)</div>
-                      <div className="text-xs text-gray-500">Book slot, track virtual queue #12, view receipt</div>
+                      <div className="text-sm font-extrabold text-green-950 group-hover:text-green-900">
+                        {language === 'mr' ? 'शेतकरी डॅशबोर्ड (PWA)' : language === 'hi' ? 'किसान डैशबोर्ड (PWA)' : 'Farmer Dashboard (PWA)'}
+                      </div>
+                      <div className="text-xs text-gray-500">
+                        {language === 'mr' ? 'टोकन घ्या, थेट रांग #१२ पहा, पावती मिळवा' : language === 'hi' ? 'टोकन बुक करें, लाइव कतार #12 देखें, रसीद प्राप्त करें' : 'Book slot, track virtual queue #12, view receipt'}
+                      </div>
                     </div>
                   </div>
                   <ChevronRight className="w-5 h-5 text-green-700 group-hover:translate-x-1 transition-transform" />
@@ -216,8 +203,12 @@ export const WelcomeLanding: React.FC = () => {
                   <div className="flex items-center gap-3">
                     <span className="text-2xl">👮</span>
                     <div>
-                      <div className="text-sm font-extrabold text-amber-950 group-hover:text-amber-900">Procurement Officer Desk</div>
-                      <div className="text-xs text-gray-500">Verify farmer, enter weighbridge scale, complete DBT</div>
+                      <div className="text-sm font-extrabold text-amber-950 group-hover:text-amber-900">
+                        {language === 'mr' ? 'खरेदी अधिकारी डेस्क' : language === 'hi' ? 'खरीद अधिकारी डेस्क' : 'Procurement Officer Desk'}
+                      </div>
+                      <div className="text-xs text-gray-500">
+                        {language === 'mr' ? 'शेतकरी पडताळणी, वजन काटा नोंद, डीबीटी पूर्ण करा' : language === 'hi' ? 'किसान सत्यापन, तौल कांटा प्रविष्टि, डीबीटी पूर्ण करें' : 'Verify farmer, enter weighbridge scale, complete DBT'}
+                      </div>
                     </div>
                   </div>
                   <ChevronRight className="w-5 h-5 text-amber-700 group-hover:translate-x-1 transition-transform" />
@@ -230,8 +221,12 @@ export const WelcomeLanding: React.FC = () => {
                   <div className="flex items-center gap-3">
                     <span className="text-2xl">🏛️</span>
                     <div>
-                      <div className="text-sm font-extrabold text-blue-950 group-hover:text-blue-900">Government Command Center</div>
-                      <div className="text-xs text-gray-500">Live congestion heatmap, analytics, counter activation</div>
+                      <div className="text-sm font-extrabold text-blue-950 group-hover:text-blue-900">
+                        {language === 'mr' ? 'शासकीय कमांड सेंटर' : language === 'hi' ? 'सरकारी कमांड सेंटर' : 'Government Command Center'}
+                      </div>
+                      <div className="text-xs text-gray-500">
+                        {language === 'mr' ? 'थेट गर्दी नियंत्रण, विश्लेषण व काउंटर सक्रियता' : language === 'hi' ? 'लाइव भीड़ प्रबंधन, विश्लेषण और काउंटर सक्रियण' : 'Live congestion heatmap, analytics, counter activation'}
+                      </div>
                     </div>
                   </div>
                   <ChevronRight className="w-5 h-5 text-blue-700 group-hover:translate-x-1 transition-transform" />
@@ -243,7 +238,7 @@ export const WelcomeLanding: React.FC = () => {
             <div className="p-4 bg-emerald-50 rounded-2xl border border-emerald-200 text-xs text-emerald-950 flex items-center gap-3">
               <CheckCircle2 className="w-5 h-5 text-emerald-700 shrink-0" />
               <span>
-                <strong>System Live:</strong> SQLite DB seeded with 30+ farmers, 6 APMC centers, and historical queue regression data.
+                <strong>{language === 'mr' ? 'प्रणाली सक्रिय:' : language === 'hi' ? 'सिस्टम सक्रिय:' : 'System Live:'}</strong> {language === 'mr' ? '३०+ शेतकरी, ६ कृषी उत्पन्न बाजार समित्या व थेट रांग प्रणाली सुरू.' : language === 'hi' ? '30+ किसान, 6 मंडी केंद्र और लाइव कतार प्रबंधन सक्रिय।' : 'SQLite DB connected with 30+ farmers, 6 APMC centers, and virtual queue engine.'}
               </span>
             </div>
 

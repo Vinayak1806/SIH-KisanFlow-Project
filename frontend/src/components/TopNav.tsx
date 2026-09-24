@@ -140,14 +140,20 @@ export const TopNav: React.FC = () => {
               className="flex items-center gap-1.5 text-xs font-extrabold px-3 py-2 rounded-xl bg-gradient-to-r from-green-700 to-green-800 text-white shadow-soft active:scale-95 hover:from-green-800 hover:to-green-900 transition"
               title="Switch User Role"
             >
-              <span>{user?.role === 'officer' ? '👮 Officer' : user?.role === 'admin' ? '🏛️ Admin' : '👨‍🌾 Farmer'}</span>
+              <span>
+                {user?.role === 'officer' 
+                  ? (language === 'mr' ? '👮 अधिकारी' : language === 'hi' ? '👮 अधिकारी' : '👮 Officer') 
+                  : user?.role === 'admin' 
+                  ? (language === 'mr' ? '🏛️ प्रशासक' : language === 'hi' ? '🏛️ प्रशासक' : '🏛️ Admin') 
+                  : (language === 'mr' ? '👨‍🌾 शेतकरी' : language === 'hi' ? '👨‍🌾 किसान' : '👨‍🌾 Farmer')}
+              </span>
               <ChevronDown className="w-3 h-3 opacity-80" />
             </button>
 
             {demoOpen && (
               <div className="absolute right-0 mt-2 w-56 bg-white rounded-2xl shadow-2xl border border-gray-100 p-2 z-50 text-xs animate-in fade-in zoom-in-95 duration-150">
                 <div className="text-[10px] uppercase font-black text-gray-400 px-3 py-1">
-                  Switch Active Portal Role
+                  {language === 'mr' ? 'सक्रिय भूमिका बदला' : language === 'hi' ? 'सक्रिय भूमिका बदलें' : 'Switch Active Portal Role'}
                 </div>
                 
                 <button
@@ -162,7 +168,7 @@ export const TopNav: React.FC = () => {
                 >
                   <span className="text-lg">👨‍🌾</span>
                   <div>
-                    <div className="font-bold">Farmer Demo</div>
+                    <div className="font-bold">{language === 'mr' ? 'शेतकरी पोर्टल' : language === 'hi' ? 'किसान पोर्टल' : 'Farmer Demo'}</div>
                     <div className="text-[10px] text-gray-500">Rajesh Pawar (FARM1001)</div>
                   </div>
                 </button>
@@ -179,7 +185,7 @@ export const TopNav: React.FC = () => {
                 >
                   <span className="text-lg">👮</span>
                   <div>
-                    <div className="font-bold">Procurement Officer</div>
+                    <div className="font-bold">{language === 'mr' ? 'खरेदी अधिकारी' : language === 'hi' ? 'खरीद अधिकारी' : 'Procurement Officer'}</div>
                     <div className="text-[10px] text-gray-500">Pune Center (OFF1001)</div>
                   </div>
                 </button>
@@ -196,7 +202,7 @@ export const TopNav: React.FC = () => {
                 >
                   <span className="text-lg">🏛️</span>
                   <div>
-                    <div className="font-bold">Government Command</div>
+                    <div className="font-bold">{language === 'mr' ? 'शासकीय कमांड' : language === 'hi' ? 'सरकारी कमांड' : 'Government Command'}</div>
                     <div className="text-[10px] text-gray-500">Agri Dept (ADMIN001)</div>
                   </div>
                 </button>

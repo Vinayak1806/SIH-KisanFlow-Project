@@ -1,14 +1,14 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
-  User, Phone, MapPin, Globe, Bell, Headphones, 
+  User, Phone, MapPin, Bell, Headphones, 
   LogOut, Shield, ChevronRight, Wheat, Check 
 } from 'lucide-react';
-import { useLanguage, Language } from '../context/LanguageContext';
+import { useLanguage } from '../context/LanguageContext';
 import { useAuth } from '../context/AuthContext';
 
 export const ProfileScreen: React.FC = () => {
-  const { t, language, setLanguage } = useLanguage();
+  const { t, language } = useLanguage();
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -22,7 +22,11 @@ export const ProfileScreen: React.FC = () => {
           <span>{t('profile')}</span>
         </h1>
         <p className="text-xs sm:text-sm text-gray-500 mt-1">
-          Farmer Aadhaar & Bank Details, Preferences and Government Helpline
+          {language === 'mr' 
+            ? 'शेतकरी आधार, बँक तपशील व शासकीय हेल्पलाईन' 
+            : language === 'hi'
+            ? 'किसान आधार, बैंक विवरण एवं सरकारी हेल्पलाइन'
+            : 'Farmer Aadhaar & Bank Details, Preferences and Government Helpline'}
         </p>
       </div>
 
@@ -35,79 +39,58 @@ export const ProfileScreen: React.FC = () => {
           </div>
 
           <h2 className="text-xl font-black text-green-950">
-            {user?.name || 'Rajesh Baburao Pawar'}
+            {user?.name || (language === 'mr' ? 'राजेश बाबुराव पवार' : language === 'hi' ? 'राजेश बाबूराव पवार' : 'Rajesh Baburao Pawar')}
           </h2>
           <div className="text-xs font-mono font-bold text-green-800 bg-green-50 px-3 py-1 rounded-full w-fit mx-auto mt-1 border border-green-200">
             {user?.farmerIdStr || 'FARM1001'}
           </div>
           <p className="text-xs text-gray-500 mt-2">
-            Verified Farmer • District Pune, Maharashtra
+            {t('verified_farmer')} • {t('district_pune')}
           </p>
 
           {/* Details Summary */}
           <div className="space-y-3 mt-6 pt-5 border-t border-gray-100 text-left text-xs sm:text-sm">
             <div className="flex justify-between py-1 border-b border-gray-50">
-              <span className="text-gray-400">Mobile:</span>
+              <span className="text-gray-400">{t('mobile')}:</span>
               <span className="font-bold text-gray-800">+91 98220 11001</span>
             </div>
             <div className="flex justify-between py-1 border-b border-gray-50">
-              <span className="text-gray-400">Village & Taluka:</span>
-              <span className="font-bold text-gray-800">Shivane, Haveli</span>
+              <span className="text-gray-400">{t('village')}:</span>
+              <span className="font-bold text-gray-800">{language === 'mr' ? 'शिवणे, हवेली' : language === 'hi' ? 'शिवणे, हवेली' : 'Shivane, Haveli'}</span>
             </div>
             <div className="flex justify-between py-1 border-b border-gray-50">
-              <span className="text-gray-400">Bank Account:</span>
-              <span className="font-bold text-gray-800">Bank of Maharashtra (****4912)</span>
+              <span className="text-gray-400">{t('bank_account')}:</span>
+              <span className="font-bold text-gray-800">{language === 'mr' ? 'बँक ऑफ महाराष्ट्र (****४९१२)' : language === 'hi' ? 'बैंक ऑफ महाराष्ट्र (****4912)' : 'Bank of Maharashtra (****4912)'}</span>
             </div>
             <div className="flex justify-between py-1">
-              <span className="text-gray-400">NPCI Aadhaar Link:</span>
-              <span className="font-bold text-emerald-700">● Active & Verified</span>
+              <span className="text-gray-400">{t('npci_linked')}:</span>
+              <span className="font-bold text-emerald-700">● {language === 'mr' ? 'सक्रिय व पडताळणीकृत' : language === 'hi' ? 'सक्रिय एवं सत्यापित' : 'Active & Verified'}</span>
             </div>
           </div>
         </div>
 
-        {/* Right Column: Preferences, Crops & Helpline */}
+        {/* Right Column: Crops & Helpline */}
         <div className="lg:col-span-7 space-y-4">
-          
-          {/* Language Preference Section */}
-          <div className="bg-white rounded-3xl p-6 border border-gray-200 shadow-soft">
-            <div className="flex items-center gap-2 mb-3">
-              <Globe className="w-5 h-5 text-green-700" />
-              <h3 className="text-xs font-extrabold uppercase tracking-wider text-gray-700">
-                {t('choose_language')}
-              </h3>
-            </div>
-
-            <div className="grid grid-cols-3 gap-3">
-              {(['mr', 'hi', 'en'] as Language[]).map((lang) => (
-                <button
-                  key={lang}
-                  onClick={() => setLanguage(lang)}
-                  className={`py-3 px-3 rounded-2xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-1.5 ${
-                    language === lang
-                      ? 'bg-green-700 text-white shadow-soft'
-                      : 'bg-gray-100 text-gray-700 hover:bg-green-50'
-                  }`}
-                >
-                  <span>{lang === 'mr' ? 'मराठी' : lang === 'hi' ? 'हिंदी' : 'English'}</span>
-                  {language === lang && <Check className="w-4 h-4 stroke-[3]" />}
-                </button>
-              ))}
-            </div>
-          </div>
 
           {/* Crop Preferences */}
           <div className="bg-white rounded-3xl p-6 border border-gray-200 shadow-soft">
             <div className="flex items-center gap-2 mb-3">
               <Wheat className="w-5 h-5 text-green-700" />
               <h3 className="text-xs font-extrabold uppercase tracking-wider text-gray-700">
-                Registered Crops
+                {t('registered_crops')}
               </h3>
             </div>
 
             <div className="flex flex-wrap gap-2 text-xs sm:text-sm">
-              <span className="bg-green-100 text-green-900 font-bold px-3.5 py-1.5 rounded-full border border-green-200">Wheat (गहू)</span>
-              <span className="bg-green-100 text-green-900 font-bold px-3.5 py-1.5 rounded-full border border-green-200">Cotton (कापूस)</span>
-              <span className="bg-gray-100 text-gray-600 px-3.5 py-1.5 rounded-full hover:bg-gray-200 transition cursor-pointer">+ Add Crop</span>
+              <span className="bg-green-100 text-green-900 font-bold px-3.5 py-1.5 rounded-full border border-green-200">
+                {language === 'mr' ? 'गहू (Wheat)' : language === 'hi' ? 'गेहूं (Wheat)' : 'Wheat'}
+              </span>
+              <span className="bg-green-100 text-green-900 font-bold px-3.5 py-1.5 rounded-full border border-green-200">
+                {language === 'mr' ? 'कापूस (Cotton)' : language === 'hi' ? 'कपास (Cotton)' : 'Cotton'}
+              </span>
+              <span className="bg-gray-100 text-gray-600 px-3.5 py-1.5 rounded-full hover:bg-gray-200 transition cursor-pointer">
+                {language === 'mr' ? '+ पीक जोडा' : language === 'hi' ? '+ फसल जोड़ें' : '+ Add Crop'}
+              </span>
             </div>
           </div>
 
@@ -119,12 +102,16 @@ export const ProfileScreen: React.FC = () => {
                   <Headphones className="w-6 h-6" />
                 </div>
                 <div>
-                  <div className="text-sm font-extrabold text-gray-900">Kisan Call Center Helpline</div>
-                  <div className="text-xs sm:text-sm font-black text-green-800">Toll-Free 1800-180-1551 (24x7)</div>
+                  <div className="text-sm font-extrabold text-gray-900">
+                    {t('kisan_helpline')}
+                  </div>
+                  <div className="text-xs sm:text-sm font-black text-green-800">
+                    {t('toll_free')}
+                  </div>
                 </div>
               </div>
               <span className="text-xs font-bold bg-green-100 text-green-800 px-3 py-1 rounded-full border border-green-200">
-                24x7 Help
+                {t('help_24x7')}
               </span>
             </div>
           </div>
