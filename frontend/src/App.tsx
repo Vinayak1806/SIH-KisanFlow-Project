@@ -29,7 +29,7 @@ export function App() {
     <LanguageProvider>
       <AuthProvider>
         <Router>
-          <div className="min-h-screen bg-[#FAF7F0] flex flex-col font-sans">
+          <div className="min-h-screen bg-[#FAF7F0] flex flex-col font-sans w-full max-w-full overflow-x-hidden">
             
             {/* Top Navigation */}
             <TopNav />
@@ -38,7 +38,7 @@ export function App() {
             <DemoFlowBar />
 
             {/* Main Application Body with top padding for fixed bars */}
-            <main className="flex-1 pt-7">
+            <main className="flex-1 pt-7 w-full max-w-full overflow-x-hidden">
               <Routes>
                 {/* 16 Farmer Screens */}
                 <Route path="/" element={<WelcomeLanding />} />

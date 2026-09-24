@@ -32,27 +32,27 @@ export const TopNav: React.FC = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm transition-all">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm transition-all w-full max-w-full overflow-hidden">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-1 sm:gap-3">
         
         {/* Brand Logo */}
         <div 
           onClick={() => navigate('/')} 
-          className="flex items-center gap-3 cursor-pointer active:scale-95 transition-transform shrink-0"
+          className="flex items-center gap-2 sm:gap-3 cursor-pointer active:scale-95 transition-transform min-w-0 shrink"
         >
-          <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-green-600 to-green-800 flex items-center justify-center text-white shadow-soft">
-            <Sprout className="w-6 h-6 stroke-[2.2]" />
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-gradient-to-br from-green-600 to-green-800 flex items-center justify-center text-white shadow-soft shrink-0">
+            <Sprout className="w-4 h-4 sm:w-6 sm:h-6 stroke-[2.2]" />
           </div>
-          <div>
+          <div className="min-w-0">
             <div className="flex items-center gap-1.5">
-              <span className="font-extrabold text-xl tracking-tight text-green-950 font-sans">
+              <span className="font-extrabold text-base sm:text-xl tracking-tight text-green-950 font-sans whitespace-nowrap">
                 Kisan<span className="text-green-600">Flow</span>
               </span>
-              <span className="text-[10px] font-bold bg-green-100 text-green-800 border border-green-200 px-2 py-0.5 rounded-full uppercase tracking-wider">
+              <span className="text-[9px] font-bold bg-green-100 text-green-800 border border-green-200 px-1.5 py-0.5 rounded-full uppercase tracking-wider hidden lg:inline-block">
                 Govt. APMC Portal
               </span>
             </div>
-            <p className="text-[10px] text-gray-500 font-medium -mt-0.5 hidden sm:block">
+            <p className="text-[10px] text-gray-500 font-medium -mt-0.5 hidden sm:block truncate">
               {language === 'mr' ? 'शासकीय शेतकरी रांग व खरेदी प्रणाली' : language === 'hi' ? 'स्मार्ट फसल खरीद एवं डिजिटल कतार' : 'Smart Agricultural Procurement & Virtual Queue'}
             </p>
           </div>
@@ -81,11 +81,11 @@ export const TopNav: React.FC = () => {
         </nav>
 
         {/* Right Action Icons: Language, Notifications, Demo Pill */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
           
           {/* Offline / Online Pill */}
           {!isOnline && (
-            <span className="flex items-center gap-1 text-[11px] bg-red-100 text-red-700 px-2.5 py-1 rounded-full font-medium">
+            <span className="flex items-center gap-1 text-[10px] bg-red-100 text-red-700 px-2 py-0.5 rounded-full font-medium">
               <WifiOff className="w-3 h-3" /> <span className="hidden sm:inline">Offline</span>
             </span>
           )}
@@ -94,16 +94,16 @@ export const TopNav: React.FC = () => {
           <div className="relative">
             <button
               onClick={() => setLangOpen(!langOpen)}
-              className="flex items-center gap-1.5 text-xs font-bold px-3 py-2 rounded-xl bg-gray-50 hover:bg-gray-100 border border-gray-200/80 text-gray-700 active:scale-95 transition"
+              className="flex items-center gap-1 sm:gap-1.5 text-[11px] sm:text-xs font-bold px-2 py-1.5 sm:px-3 sm:py-2 rounded-xl bg-gray-50 hover:bg-gray-100 border border-gray-200/80 text-gray-700 active:scale-95 transition"
               title="Change Language"
             >
-              <Globe className="w-4 h-4 text-green-700" />
-              <span>{language === 'mr' ? 'मराठी' : language === 'hi' ? 'हिंदी' : 'English'}</span>
-              <ChevronDown className="w-3 h-3 text-gray-400" />
+              <Globe className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-700 shrink-0" />
+              <span>{language === 'mr' ? 'मराठी' : language === 'hi' ? 'हिंदी' : 'EN'}</span>
+              <ChevronDown className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-gray-400" />
             </button>
 
             {langOpen && (
-              <div className="absolute right-0 mt-2 w-40 bg-white rounded-2xl shadow-xl border border-gray-100 py-1.5 z-50 animate-in fade-in zoom-in-95 duration-150">
+              <div className="absolute right-0 mt-2 w-36 sm:w-40 bg-white rounded-2xl shadow-xl border border-gray-100 py-1.5 z-50 animate-in fade-in zoom-in-95 duration-150">
                 {languages.map((l) => (
                   <button
                     key={l.code}
@@ -126,18 +126,18 @@ export const TopNav: React.FC = () => {
           {/* Notifications Icon with Badge */}
           <button
             onClick={() => navigate('/notifications')}
-            className="relative p-2.5 rounded-xl text-gray-600 hover:text-green-800 hover:bg-green-50 active:scale-95 transition"
+            className="relative p-1.5 sm:p-2 rounded-xl text-gray-600 hover:text-green-800 hover:bg-green-50 active:scale-95 transition"
             aria-label="Notifications"
           >
-            <Bell className="w-5 h-5 stroke-[2]" />
-            <span className="absolute top-2 right-2 w-2.5 h-2.5 bg-amber-500 rounded-full ring-2 ring-white animate-pulse" />
+            <Bell className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2]" />
+            <span className="absolute top-1 sm:top-1.5 right-1 sm:right-1.5 w-2 h-2 sm:w-2.5 sm:h-2.5 bg-amber-500 rounded-full ring-2 ring-white animate-pulse" />
           </button>
 
           {/* Role Switcher */}
           <div className="relative">
             <button
               onClick={() => setDemoOpen(!demoOpen)}
-              className="flex items-center gap-1.5 text-xs font-extrabold px-3 py-2 rounded-xl bg-gradient-to-r from-green-700 to-green-800 text-white shadow-soft active:scale-95 hover:from-green-800 hover:to-green-900 transition"
+              className="flex items-center gap-1 sm:gap-1.5 text-[11px] sm:text-xs font-extrabold px-2 py-1.5 sm:px-3 sm:py-2 rounded-xl bg-gradient-to-r from-green-700 to-green-800 text-white shadow-soft active:scale-95 hover:from-green-800 hover:to-green-900 transition whitespace-nowrap"
               title="Switch User Role"
             >
               <span>
@@ -147,7 +147,7 @@ export const TopNav: React.FC = () => {
                   ? (language === 'mr' ? '🏛️ प्रशासक' : language === 'hi' ? '🏛️ प्रशासक' : '🏛️ Admin') 
                   : (language === 'mr' ? '👨‍🌾 शेतकरी' : language === 'hi' ? '👨‍🌾 किसान' : '👨‍🌾 Farmer')}
               </span>
-              <ChevronDown className="w-3 h-3 opacity-80" />
+              <ChevronDown className="w-2.5 h-2.5 sm:w-3 sm:h-3 opacity-80" />
             </button>
 
             {demoOpen && (

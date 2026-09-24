@@ -26,12 +26,12 @@ export const DemoFlowBar: React.FC = () => {
     return (
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-5 right-5 z-50 bg-gradient-to-r from-green-800 via-emerald-800 to-green-900 hover:from-green-700 hover:to-emerald-700 text-white px-4 py-2.5 rounded-full shadow-2xl border border-emerald-500/40 text-xs font-bold flex items-center gap-2.5 backdrop-blur-md transition-all active:scale-95 group hover:ring-4 hover:ring-emerald-500/20"
+        className="fixed bottom-5 right-3 sm:right-5 z-50 bg-gradient-to-r from-green-800 via-emerald-800 to-green-900 hover:from-green-700 hover:to-emerald-700 text-white px-3 sm:px-4 py-2 sm:py-2.5 rounded-full shadow-2xl border border-emerald-500/40 text-[11px] sm:text-xs font-bold flex items-center gap-2 backdrop-blur-md transition-all active:scale-95 group hover:ring-4 hover:ring-emerald-500/20 max-w-[calc(100vw-1.5rem)]"
         title="Open Evaluator Presentation Shortcuts"
       >
-        <span className="flex h-2.5 w-2.5 rounded-full bg-amber-400 animate-ping" />
-        <Sparkles className="w-4 h-4 text-amber-300 group-hover:rotate-12 transition-transform" />
-        <span className="text-xs tracking-wide font-extrabold text-amber-100">Presentation Shortcuts</span>
+        <span className="flex h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full bg-amber-400 animate-ping shrink-0" />
+        <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-300 group-hover:rotate-12 transition-transform shrink-0" />
+        <span className="text-[11px] sm:text-xs tracking-wide font-extrabold text-amber-100 whitespace-nowrap">Presentation Shortcuts</span>
       </button>
     );
   }

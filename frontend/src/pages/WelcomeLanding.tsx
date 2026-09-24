@@ -25,12 +25,12 @@ export const WelcomeLanding: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#FAF7F0] via-[#F4F9F4] to-[#FAF7F0] pb-24 md:pb-12 text-gray-900">
+    <div className="min-h-screen bg-gradient-to-b from-[#FAF7F0] via-[#F4F9F4] to-[#FAF7F0] pb-24 md:pb-12 text-gray-900 w-full max-w-full overflow-x-hidden">
       
       {/* Top Bar */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 flex justify-between items-center">
-        <div className="flex items-center gap-2">
-          <span className="text-xs font-bold text-green-900 bg-green-100 px-3 py-1 rounded-full border border-green-200">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 flex flex-wrap justify-between items-center gap-2">
+        <div className="flex items-center gap-2 max-w-full">
+          <span className="text-[11px] sm:text-xs font-bold text-green-900 bg-green-100 px-2.5 sm:px-3 py-1 rounded-full border border-green-200">
             {language === 'mr' ? '🌾 महाराष्ट्र शासन • कृषी उत्पन्न बाजार समिती' : language === 'hi' ? '🌾 महाराष्ट्र शासन • कृषि उपज मंडी पोर्टल' : '🌾 Govt. of Maharashtra • APMC Mandi Portal'}
           </span>
           <span className="hidden sm:inline-block text-xs font-semibold text-gray-500">
@@ -146,14 +146,16 @@ export const WelcomeLanding: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="bg-white p-4 rounded-2xl border border-purple-100 text-purple-700 flex items-center justify-center mb-2">
-                  <Users className="w-4 h-4 stroke-[2.2]" />
-                </div>
-                <div className="text-xs font-bold text-gray-900">
-                  {t('fast_dbt')}
-                </div>
-                <div className="text-[10px] text-gray-500 mt-0.5">
-                  {t('fast_dbt_desc')}
+                <div className="bg-white p-4 rounded-2xl border border-gray-100 shadow-xs">
+                  <div className="w-9 h-9 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center mb-2">
+                    <Users className="w-4 h-4 stroke-[2.2]" />
+                  </div>
+                  <div className="text-xs font-bold text-gray-900">
+                    {t('fast_dbt')}
+                  </div>
+                  <div className="text-[10px] text-gray-500 mt-0.5">
+                    {t('fast_dbt_desc')}
+                  </div>
                 </div>
               </div>
             </div>
